@@ -16,7 +16,7 @@ export default function RootLayout({
         {/* end Convert Experiences code */}
         
         {/* Start of Blitz client code snippet */}
-        <Script
+        {/*<Script
           id="blitz-client"
           strategy="afterInteractive"
           dangerouslySetInnerHTML={{
