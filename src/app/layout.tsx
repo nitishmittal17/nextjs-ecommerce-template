@@ -39,6 +39,12 @@ export default function RootLayout({
           }}
         />
         {/* End of Blitz client code snippet */}
+        
+        {/* AB Tasty script */}
+        <Script
+          src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
+          strategy="afterInteractive"
+        />
       </head>
       <body>{children}</body>
     </html>
