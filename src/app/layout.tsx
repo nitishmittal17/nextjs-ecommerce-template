@@ -43,7 +43,7 @@ export default function RootLayout({
         {/* AB Tasty script */}
         <Script
           src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
-          strategy="afterInteractive"
+          strategy="beforeInteractive"
         />
       </head>
       <body>{children}</body>
