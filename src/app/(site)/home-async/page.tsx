@@ -37,7 +37,7 @@ export default function HomeAsyncPage() {
               if (typeof window.abtasty !== 'undefined' && typeof window.abtasty.send === 'function') {
                 // Generate random transaction values
                 const randomId = 'OD' + Math.floor(Math.random() * 1000 + 100);
-                const transactionNames = ['Purchase', 'Order', 'Checkout', 'Sale', 'Payment'];
+                const transactionNames = ['Purchase123', 'Order123', 'Checkout123', 'Sale123', 'Payment123'];
                 const currencies = ['USD', 'EUR', 'GBP', 'CAD', 'AUD', 'JPY'];
                 const couponCodes = ['SAVE10', 'WELCOME', 'SUMMER20', 'NEWUSER', 'FREESHIP'];
                 const paymentMethods = ['PayPal', 'Credit Card', 'Debit Card', 'Stripe', 'Apple Pay', 'Google Pay'];
