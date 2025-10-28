@@ -14,7 +14,7 @@ export default function HomeAsyncPage() {
       {/* AB Tasty Async Script */}
       <Script
         id="abtasty-async"
-        strategy="afterInteractive"
+        strategy="beforeInteractive"
         dangerouslySetInnerHTML={{
           __html: `
             (function (i, s, o, g, r, a, m) {
