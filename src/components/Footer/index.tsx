@@ -1,8 +1,135 @@
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import Image from "next/image";
 
 const Footer = () => {
   const year = new Date().getFullYear();
+  const shadowHostRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (shadowHostRef.current && !shadowHostRef.current.shadowRoot) {
+      const shadowRoot = shadowHostRef.current.attachShadow({ mode: "open" });
+
+      const style = document.createElement("style");
+      style.textContent = `
+        .feedback-container {
+          background-color: #10b981;
+          padding: 20px;
+          border-radius: 8px;
+          margin: 20px 0;
+          max-width: 400px;
+        }
+        .feedback-title {
+          color: white;
+          font-size: 18px;
+          font-weight: 600;
+          margin-bottom: 15px;
+        }
+        .feedback-form {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+        }
+        .feedback-form label {
+          color: white;
+          font-size: 14px;
+          font-weight: 500;
+        }
+        .feedback-form input,
+        .feedback-form textarea {
+          padding: 10px;
+          border: none;
+          border-radius: 4px;
+          font-size: 14px;
+          font-family: inherit;
+          width: 100%;
+          box-sizing: border-box;
+        }
+        .feedback-form textarea {
+          resize: vertical;
+          min-height: 80px;
+        }
+        .feedback-form button {
+          background-color: #047857;
+          color: white;
+          padding: 10px 20px;
+          border: none;
+          border-radius: 4px;
+          font-size: 14px;
+          font-weight: 600;
+          cursor: pointer;
+          transition: background-color 0.2s;
+        }
+        .feedback-form button:hover {
+          background-color: #065f46;
+        }
+      `;
+
+      const container = document.createElement("div");
+      container.className = "feedback-container";
+
+      const title = document.createElement("h3");
+      title.className = "feedback-title";
+      title.textContent = "Shadow DOM Form";
+
+      const form = document.createElement("form");
+      form.className = "feedback-form";
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        alert("Thank you for your feedback!");
+        form.reset();
+      });
+
+      const nameLabel = document.createElement("label");
+      nameLabel.textContent = "Name:";
+      nameLabel.setAttribute("for", "feedback-name");
+
+      const nameInput = document.createElement("input");
+      nameInput.type = "text";
+      nameInput.id = "feedback-name";
+      nameInput.name = "name";
+      nameInput.required = true;
+      nameInput.placeholder = "Enter your name";
+
+      const emailLabel = document.createElement("label");
+      emailLabel.textContent = "Email:";
+      emailLabel.setAttribute("for", "feedback-email");
+
+      const emailInput = document.createElement("input");
+      emailInput.type = "email";
+      emailInput.id = "feedback-email";
+      emailInput.name = "email";
+      emailInput.required = true;
+      emailInput.placeholder = "Enter your email";
+
+      const messageLabel = document.createElement("label");
+      messageLabel.textContent = "Feedback:";
+      messageLabel.setAttribute("for", "feedback-message");
+
+      const messageTextarea = document.createElement("textarea");
+      messageTextarea.id = "feedback-message";
+      messageTextarea.name = "message";
+      messageTextarea.required = true;
+      messageTextarea.placeholder = "Share your feedback about the website";
+
+      const submitButton = document.createElement("button");
+      submitButton.type = "submit";
+      submitButton.textContent = "Submit Feedback";
+
+      form.appendChild(nameLabel);
+      form.appendChild(nameInput);
+      form.appendChild(emailLabel);
+      form.appendChild(emailInput);
+      form.appendChild(messageLabel);
+      form.appendChild(messageTextarea);
+      form.appendChild(submitButton);
+
+      container.appendChild(title);
+      container.appendChild(form);
+
+      shadowRoot.appendChild(style);
+      shadowRoot.appendChild(container);
+    }
+  }, []);
 
   return (
     <footer className="overflow-hidden">
@@ -331,6 +458,29 @@ const Footer = () => {
           </div>
         </div>
         {/* <!-- footer menu end --> */}
+      </div>
+
+      {/* <!-- Feedback Forms Section --> */}
+      <div className="max-w-[1170px] mx-auto px-4 sm:px-8 xl:px-0 py-10">
+        <div className="flex flex-wrap gap-6 justify-center items-start">
+          {/* Shadow DOM Feedback Form */}
+          <div className="flex-1 min-w-[300px] max-w-[400px]">
+            <div ref={shadowHostRef}></div>
+          </div>
+
+          {/* Iframe Feedback Form */}
+          <div className="flex-1 min-w-[300px] max-w-[400px]">
+            <iframe
+              src="/feedback-form"
+              className="w-full border-0 rounded-lg"
+              style={{
+                minHeight: "400px",
+                backgroundColor: "#10b981",
+              }}
+              title="Feedback Form"
+            />
+          </div>
+        </div>
       </div>
 
       {/* <!-- footer bottom start --> */}
