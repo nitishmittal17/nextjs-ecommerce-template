@@ -87,11 +87,20 @@ export default function HomePage() {
         }}
       />
       
+      {/* HubSpot Tracking Script */}
+      <Script
+        id="hs-script-loader"
+        src="//js.hs-scripts.com/45744167.js"
+        strategy="afterInteractive"
+      />
+      
       {/* HubSpot Form Script */}
       <Script
         src="https://js.hsforms.net/forms/embed/45744167.js"
         strategy="afterInteractive"
       />
+      
+      
       
       <Home />
     </>
