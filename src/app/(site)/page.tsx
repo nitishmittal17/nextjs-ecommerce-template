@@ -87,6 +87,12 @@ export default function HomePage() {
         }}
       />
       
+      {/* HubSpot Form Script */}
+      <Script
+        src="https://js.hsforms.net/forms/embed/45744167.js"
+        strategy="afterInteractive"
+      />
+      
       <Home />
     </>
   );
