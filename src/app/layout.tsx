@@ -45,8 +45,13 @@ export default function RootLayout({
           src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
           strategy="beforeInteractive"
         />
+
+        <Script
+          src="https://gs.wandzcdn.com/wandz/VWYFVT61MW.js"
+          strategy="afterInteractive"
+        />
       </head>
       <body>{children}</body>
     </html>
   )
-} 
+}
