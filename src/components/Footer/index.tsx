@@ -5,6 +5,9 @@ const Footer = () => {
   const year = new Date().getFullYear();
   const shadowHostRef = useRef<HTMLDivElement>(null);
 
+  // Shadow DOM feedback form – kept here for easy re-enable
+  // Uncomment this effect and the JSX section below to show the form again
+  /*
   useEffect(() => {
     if (shadowHostRef.current && !shadowHostRef.current.shadowRoot) {
       const shadowRoot = shadowHostRef.current.attachShadow({ mode: "open" });
@@ -130,6 +133,7 @@ const Footer = () => {
       shadowRoot.appendChild(container);
     }
   }, []);
+  */
 
   return (
     <footer className="overflow-hidden">
@@ -460,28 +464,30 @@ const Footer = () => {
         {/* <!-- footer menu end --> */}
       </div>
 
-      {/* <!-- Feedback Forms Section --> */}
-      <div className="max-w-[1170px] mx-auto px-4 sm:px-8 xl:px-0 py-10">
-        <div className="flex flex-wrap gap-6 justify-center items-start">
-          {/* Shadow DOM Feedback Form */}
-          <div className="flex-1 min-w-[300px] max-w-[400px]">
-            <div ref={shadowHostRef}></div>
-          </div>
+      {/* Feedback Forms Section – set the flag below to true or inline-remove `false &&` to re-enable */}
+      {false && (
+        <div className="max-w-[1170px] mx-auto px-4 sm:px-8 xl:px-0 py-10">
+          <div className="flex flex-wrap gap-6 justify-center items-start">
+            {/* Shadow DOM Feedback Form */}
+            <div className="flex-1 min-w-[300px] max-w-[400px]">
+              <div ref={shadowHostRef}></div>
+            </div>
 
-          {/* Iframe Feedback Form */}
-          <div className="flex-1 min-w-[300px] max-w-[400px]">
-            <iframe
-              src="/feedback-form"
-              className="w-full border-0 rounded-lg"
-              style={{
-                minHeight: "400px",
-                backgroundColor: "#10b981",
-              }}
-              title="Feedback Form"
-            />
+            {/* Iframe Feedback Form */}
+            <div className="flex-1 min-w-[300px] max-w-[400px]">
+              <iframe
+                src="/feedback-form"
+                className="w-full border-0 rounded-lg"
+                style={{
+                  minHeight: "400px",
+                  backgroundColor: "#10b981",
+                }}
+                title="Feedback Form"
+              />
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
       {/* <!-- footer bottom start --> */}
       <div className="py-5 xl:py-7.5 bg-gray-1">
