@@ -28,6 +28,7 @@ export default function RootLayout({
   const pathname = usePathname();
   const isPerformanceTestPage = pathname === '/performance-test-vwo';
   const isHomePage = pathname === '/';
+  const isPerformanceTestAbTastyPage = pathname === '/performance-test-abtasty';
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 1000);
@@ -36,10 +37,21 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning={true}>
       <head>
+        {/* Global performance timestamp - set before any test scripts load */}
+        {(isPerformanceTestPage || isHomePage || isPerformanceTestAbTastyPage) && (
+          <Script
+            id="performance-timestamp"
+            strategy="beforeInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `window.perfTestStartTime = performance.now();`
+            }}
+          />
+        )}
+
         {/* VWO Script - Only for performance-test-vwo page */}
         {isPerformanceTestPage && <VWOScript accountId="1162388" />}
 
-        {/* AB Tasty and Wandz scripts - Only for home page */}
+        {/* AB Tasty script - for home page and performance test page */}
         {isHomePage && (
           <>
             <Script
@@ -51,6 +63,13 @@ export default function RootLayout({
               strategy="afterInteractive"
             />
           </>
+        )}
+
+        {isPerformanceTestAbTastyPage && (
+          <Script
+            src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
+            strategy="beforeInteractive"
+          />
         )}
       </head>
       <body>

@@ -10,12 +10,6 @@ export const metadata: Metadata = {
 export default function PerformanceTestAbTastyPage() {
   return (
     <>
-      {/* AB Tasty sync script - using both next/script and direct injection for reliability */}
-      <Script
-        src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
-        strategy="beforeInteractive"
-      />
-
       <Home />
     </>
   );
