@@ -1,13 +1,24 @@
-import Script from 'next/script'
+'use client';
+
+import Script from 'next/script';
+import { usePathname } from 'next/navigation';
+import { VWOScript } from 'vwo-smartcode-nextjs';
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const pathname = usePathname();
+  const isPerformanceTestPage = pathname === '/performance-test-vwo';
+  const isHomePage = pathname === '/';
+
   return (
     <html lang="en">
       <head>
+        {/* VWO Script - Only for performance-test-vwo page */}
+        {isPerformanceTestPage && <VWOScript accountId="1162388" />}
+
         {/* begin Convert Experiences code */}
         {/* <Script 
           src="//cdn-4.convertexperiments.com/v1/js/10017288-10017622.js?environment=production"
@@ -40,16 +51,21 @@ export default function RootLayout({
         />
         {/* End of Blitz client code snippet */}
         
-        {/* AB Tasty script 123 */}
-        <Script
-          src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
-          strategy="beforeInteractive"
-        />
+        {/* AB Tasty and Wandz scripts - Only for home page */}
+        {isHomePage && (
+          <>
+            {/* AB Tasty script 123 */}
+            <Script
+              src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
+              strategy="beforeInteractive"
+            />
 
-        <Script
-          src="https://gs.wandzcdn.com/wandz/VWYFVT61MW.js"
-          strategy="afterInteractive"
-        />
+            <Script
+              src="https://gs.wandzcdn.com/wandz/VWYFVT61MW.js"
+              strategy="afterInteractive"
+            />
+          </>
+        )}
       </head>
       <body>{children}</body>
     </html>
