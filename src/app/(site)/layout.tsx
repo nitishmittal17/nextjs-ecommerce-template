@@ -27,6 +27,7 @@ export default function RootLayout({
   const [loading, setLoading] = useState<boolean>(true);
   const pathname = usePathname();
   const isPerformanceTestPage = pathname === '/performance-test-vwo';
+  const isPerformanceTestVwoSyncPage = pathname === '/performance-test-vwo-sync';
   const isHomePage = pathname === '/';
   const isPerformanceTestAbTastyPage = pathname === '/performance-test-abtasty';
 
@@ -38,7 +39,7 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning={true}>
       <head>
         {/* Global performance timestamp - set before any test scripts load */}
-        {(isPerformanceTestPage || isHomePage || isPerformanceTestAbTastyPage) && (
+        {(isPerformanceTestPage || isPerformanceTestVwoSyncPage || isHomePage || isPerformanceTestAbTastyPage) && (
           <Script
             id="performance-timestamp"
             strategy="beforeInteractive"
@@ -48,8 +49,11 @@ export default function RootLayout({
           />
         )}
 
-        {/* VWO Script - Only for performance-test-vwo page */}
+        {/* VWO Script - for performance-test-vwo page (async) */}
         {isPerformanceTestPage && <VWOScript accountId="1162388" />}
+
+        {/* VWO Script - for performance-test-vwo-sync page (sync) */}
+        {isPerformanceTestVwoSyncPage && <VWOScript accountId="1162388" type="SYNC" />}
 
         {/* AB Tasty script - for home page and performance test page */}
         {isHomePage && (
