@@ -1,13 +1,60 @@
-import Script from 'next/script'
+"use client";
+import { usePathname } from 'next/navigation';
+import Script from 'next/script';
+import { VWOScript } from 'vwo-smartcode-nextjs';
 
 export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
+  const pathname = usePathname();
+  const isPerformanceTestPage = pathname === '/performance-test-vwo';
+  const isPerformanceTestVwoSyncPage = pathname === '/performance-test-vwo-sync';
+  const isHomePage = pathname === '/';
+  const isPerformanceTestAbTastyPage = pathname === '/performance-test-abtasty';
+
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" suppressHydrationWarning={true}>
+      <head>
+        {/* Global performance timestamp - set before any test scripts load */}
+        {(isPerformanceTestPage || isPerformanceTestVwoSyncPage || isHomePage || isPerformanceTestAbTastyPage) && (
+          <Script
+            id="performance-timestamp"
+            strategy="beforeInteractive"
+            dangerouslySetInnerHTML={{
+              __html: `window.perfTestStartTime = performance.now();`
+            }}
+          />
+        )}
+
+        {/* VWO Script - for performance-test-vwo page (async) */}
+        {isPerformanceTestPage && <VWOScript accountId="1162388" />}
+
+        {/* VWO Script - for performance-test-vwo-sync page (sync) */}
+        {isPerformanceTestVwoSyncPage && <VWOScript accountId="1162388" type="SYNC" />}
+
+        {/* AB Tasty script - for home page and performance test page */}
+        {isHomePage && (
+          <>
+            <Script
+              src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
+              strategy="beforeInteractive"
+            />
+            <Script
+              src="https://gs.wandzcdn.com/wandz/VWYFVT61MW.js"
+              strategy="afterInteractive"
+            />
+          </>
+        )}
+
+        {isPerformanceTestAbTastyPage && (
+          <Script
+            src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
+            strategy="beforeInteractive"
+          />
+        )}
+
         {/* begin Convert Experiences code */}
         {/* <Script 
           src="//cdn-4.convertexperiments.com/v1/js/10017288-10017622.js?environment=production"
@@ -39,9 +86,8 @@ export default function RootLayout({
           }}
         />
         {/* End of Blitz client code snippet */}
-        
-        {children}
-      </body>
+      </head>
+      <body>{children}</body>
     </html>
   )
 }

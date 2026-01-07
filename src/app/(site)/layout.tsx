@@ -1,8 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
-import Script from "next/script";
-import { VWOScript } from "vwo-smartcode-nextjs";
 import "../css/euclid-circular-a-font.css";
 import "../css/style.css";
 import Header from "../../components/Header";
@@ -25,81 +22,35 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const [loading, setLoading] = useState<boolean>(true);
-  const pathname = usePathname();
-  const isPerformanceTestPage = pathname === '/performance-test-vwo';
-  const isPerformanceTestVwoSyncPage = pathname === '/performance-test-vwo-sync';
-  const isHomePage = pathname === '/';
-  const isPerformanceTestAbTastyPage = pathname === '/performance-test-abtasty';
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 1000);
   }, []);
 
   return (
-    <html lang="en" suppressHydrationWarning={true}>
-      <head>
-        {/* Global performance timestamp - set before any test scripts load */}
-        {(isPerformanceTestPage || isPerformanceTestVwoSyncPage || isHomePage || isPerformanceTestAbTastyPage) && (
-          <Script
-            id="performance-timestamp"
-            strategy="beforeInteractive"
-            dangerouslySetInnerHTML={{
-              __html: `window.perfTestStartTime = performance.now();`
-            }}
-          />
-        )}
+    <>
+      {loading ? (
+        <PreLoader />
+      ) : (
+        <>
+          <ReduxProvider>
+            <CartModalProvider>
+              <ModalProvider>
+                <PreviewSliderProvider>
+                  <Header />
+                  {children}
 
-        {/* VWO Script - for performance-test-vwo page (async) */}
-        {isPerformanceTestPage && <VWOScript accountId="1162388" />}
-
-        {/* VWO Script - for performance-test-vwo-sync page (sync) */}
-        {isPerformanceTestVwoSyncPage && <VWOScript accountId="1162388" type="SYNC" />}
-
-        {/* AB Tasty script - for home page and performance test page */}
-        {isHomePage && (
-          <>
-            <Script
-              src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
-              strategy="beforeInteractive"
-            />
-            <Script
-              src="https://gs.wandzcdn.com/wandz/VWYFVT61MW.js"
-              strategy="afterInteractive"
-            />
-          </>
-        )}
-
-        {isPerformanceTestAbTastyPage && (
-          <Script
-            src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
-            strategy="beforeInteractive"
-          />
-        )}
-      </head>
-      <body>
-        {loading ? (
-          <PreLoader />
-        ) : (
-          <>
-            <ReduxProvider>
-              <CartModalProvider>
-                <ModalProvider>
-                  <PreviewSliderProvider>
-                    <Header />
-                    {children}
-
-                    <QuickViewModal />
-                    <CartSidebarModal />
-                    <PreviewSliderModal />
-                  </PreviewSliderProvider>
-                </ModalProvider>
-              </CartModalProvider>
-            </ReduxProvider>
-            <ScrollToTop />
-            <Footer />
-          </>
-        )}
-      </body>
-    </html>
+                  <QuickViewModal />
+                  <CartSidebarModal />
+                  <PreviewSliderModal />
+                </PreviewSliderProvider>
+              </ModalProvider>
+            </CartModalProvider>
+          </ReduxProvider>
+          <ScrollToTop />
+          <Footer />
+        </>
+      )}
+    </>
   );
 }
