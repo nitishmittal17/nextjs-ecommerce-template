@@ -19,15 +19,7 @@ const Home = () => {
       <CounDown />
       <Testimonials />
       <Newsletter />
-      {/* HubSpot feedback form – uncomment to enable */}
-      {/*
-      <div
-        className="hs-form-frame"
-        data-region="na1"
-        data-form-id="ac7c7ed1-4fda-4895-93e6-bc6e15f9bb14"
-        data-portal-id="45744167"
-      ></div>
-      */}
+      <div className="hs-form-frame" data-region="na1" data-form-id="ac7c7ed1-4fda-4895-93e6-bc6e15f9bb14" data-portal-id="45744167"></div>
     </main>
   );
 };
