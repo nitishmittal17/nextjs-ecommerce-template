@@ -7,7 +7,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      {/* <head> */}
+      <body>
         {/* begin Convert Experiences code */}
         {/* <Script 
           src="//cdn-4.convertexperiments.com/v1/js/10017288-10017622.js?environment=production"
@@ -39,8 +39,9 @@ export default function RootLayout({
           }}
         />
         {/* End of Blitz client code snippet */}
-      {/* </head> */}
-      <body>{children}</body>
+        
+        {children}
+      </body>
     </html>
   )
 }
