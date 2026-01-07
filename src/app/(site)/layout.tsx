@@ -1,5 +1,8 @@
 "use client";
 import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
+import Script from "next/script";
+import { VWOScript } from "vwo-smartcode-nextjs";
 import "../css/euclid-circular-a-font.css";
 import "../css/style.css";
 import Header from "../../components/Header";
@@ -22,6 +25,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const [loading, setLoading] = useState<boolean>(true);
+  const pathname = usePathname();
+  const isPerformanceTestPage = pathname === '/performance-test-vwo';
+  const isHomePage = pathname === '/';
 
   useEffect(() => {
     setTimeout(() => setLoading(false), 1000);
@@ -29,6 +35,24 @@ export default function RootLayout({
 
   return (
     <html lang="en" suppressHydrationWarning={true}>
+      <head>
+        {/* VWO Script - Only for performance-test-vwo page */}
+        {isPerformanceTestPage && <VWOScript accountId="1162388" />}
+
+        {/* AB Tasty and Wandz scripts - Only for home page */}
+        {isHomePage && (
+          <>
+            <Script
+              src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
+              strategy="beforeInteractive"
+            />
+            <Script
+              src="https://gs.wandzcdn.com/wandz/VWYFVT61MW.js"
+              strategy="afterInteractive"
+            />
+          </>
+        )}
+      </head>
       <body>
         {loading ? (
           <PreLoader />
