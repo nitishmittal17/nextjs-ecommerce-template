@@ -1,5 +1,5 @@
 "use client";
-import { usePathname } from 'next/navigation';
+import { usePathname, useSearchParams } from 'next/navigation';
 import Script from 'next/script';
 import { VWOScript } from 'vwo-smartcode-nextjs';
 
@@ -9,6 +9,8 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const vwoAccountId = searchParams.get('id');
   const isPerformanceTestPage = pathname === '/performance-test-vwo';
   const isPerformanceTestVwoSyncPage = pathname === '/performance-test-vwo-sync';
   const isHomePage = pathname === '/';
@@ -30,6 +32,9 @@ export default function RootLayout({
 
         {/* VWO Script - for performance-test-vwo page (async) */}
         {isPerformanceTestPage && <VWOScript accountId="1162388" />}
+
+        {/* VWO Script - for home page with id query param */}
+        {isHomePage && vwoAccountId && <VWOScript accountId={vwoAccountId} />}
 
         {/* VWO Script - for performance-test-vwo-sync page (sync) */}
         {isPerformanceTestVwoSyncPage && <VWOScript accountId="1162388" type="SYNC" />}
