@@ -7,7 +7,7 @@ import { Suspense } from 'react';
 function VWOScriptContent() {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const vwoAccountId = searchParams.get('id');
+  const vwoAccountId = searchParams?.get('id');
   const isHomePage = pathname === '/';
 
   if (isHomePage && vwoAccountId) {
