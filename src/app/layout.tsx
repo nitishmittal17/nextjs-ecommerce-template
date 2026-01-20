@@ -61,7 +61,7 @@ if(f=!1,v=d.querySelector('#vwoCode'),cc={},-1<d.URL.indexOf('__vwo_disable__')|
         {isPerformanceTestVwoSyncPage && <Script
           referrerPolicy="no-referrer-when-downgrade"
           id="vwoCode"
-          src="https://dev.visualwebsiteoptimizer.com/dcdn/lib/1079634.js"
+          src="https://dev.visualwebsiteoptimizer.com/dcdn/lib/1162388.js"
           strategy="beforeInteractive"
         />}
 
