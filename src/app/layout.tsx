@@ -57,7 +57,13 @@ if(f=!1,v=d.querySelector('#vwoCode'),cc={},-1<d.URL.indexOf('__vwo_disable__')|
         {isPerformanceTestPage && <VWOScript accountId="1162388" />}
 
         {/* VWO Script - for performance-test-vwo-sync page (sync) */}
-        {isPerformanceTestVwoSyncPage && <VWOScript accountId="1162388" type="SYNC" />}
+        {/* {isPerformanceTestVwoSyncPage && <VWOScript accountId="1162388" type="SYNC" />} */}
+        {isPerformanceTestVwoSyncPage && <Script
+          referrerPolicy="no-referrer-when-downgrade"
+          id="vwoCode"
+          src="https://dev.visualwebsiteoptimizer.com/dcdn/lib/1079634.js"
+          strategy="beforeInteractive"
+        />}
 
         {/* AB Tasty script - for home page and performance test page */}
         {isHomePage && (
