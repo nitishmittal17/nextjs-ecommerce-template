@@ -13,6 +13,9 @@ export default function RootLayout({
   const isPerformanceTestVwoSyncPage = pathname === '/performance-test-vwo-sync';
   const isHomePage = pathname === '/';
   const isPerformanceTestAbTastyPage = pathname === '/performance-test-abtasty';
+  const isReactPage = pathname.startsWith('/react');
+  const isNuxtPage = pathname.startsWith('/nuxt');
+  const isShadowDomPage = pathname.startsWith('/shadow-dom');
 
   return (
     <html lang="en" suppressHydrationWarning={true}>
@@ -80,6 +83,33 @@ if(f=!1,v=d.querySelector('#vwoCode'),cc={},-1<d.URL.indexOf('__vwo_disable__')|
 
         {isPerformanceTestAbTastyPage && (
           <Script
+            src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
+            strategy="beforeInteractive"
+          />
+        )}
+
+        {/* AB Tasty script - for /react pages */}
+        {isReactPage && (
+          <Script
+            id="abtasty-react"
+            src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
+            strategy="beforeInteractive"
+          />
+        )}
+
+        {/* AB Tasty script - for /nuxt pages */}
+        {isNuxtPage && (
+          <Script
+            id="abtasty-nuxt"
+            src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
+            strategy="beforeInteractive"
+          />
+        )}
+
+        {/* AB Tasty script - for /shadow-dom pages */}
+        {isShadowDomPage && (
+          <Script
+            id="abtasty-shadow-dom"
             src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
             strategy="beforeInteractive"
           />
