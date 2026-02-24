@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const navLinks = [
   {
@@ -56,7 +57,14 @@ const GrooveHeader = () => {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-4">
             {/* Logo */}
-            <Link href="/react" className="flex-shrink-0">
+            <Link href="/react" className="flex-shrink-0 flex items-center gap-3">
+              <Image
+                src="/images/parrot-nav.png"
+                alt="Parrot"
+                width={40}
+                height={40}
+                className="rounded-full object-cover"
+              />
               <span className="text-2xl font-bold text-[#2d2926] tracking-tight">
                 Groove<span className="text-[#7c6f64]">&reg;</span>
               </span>
