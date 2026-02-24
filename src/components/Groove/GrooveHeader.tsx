@@ -66,6 +66,13 @@ const GrooveHeader = () => {
                 height={40}
                 className="rounded-full object-cover"
               />
+              <img
+                src="/images/autumn-leaves.png"
+                alt="Autumn leaves"
+                width={40}
+                height={40}
+                className="rounded-full object-cover"
+              />
               <span className="text-2xl font-bold text-[#2d2926] tracking-tight">
                 Groove<span className="text-[#7c6f64]">&reg;</span>
               </span>

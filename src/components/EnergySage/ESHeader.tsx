@@ -69,6 +69,13 @@ const ESHeader = () => {
               height={40}
               className="rounded-full object-cover"
             />
+            <img
+              src="/images/autumn-leaves.png"
+              alt="Autumn leaves"
+              width={40}
+              height={40}
+              className="rounded-full object-cover"
+            />
             <span className="text-xl font-bold text-[#333]">
               Energy<span className="text-[#f26522]">Sage</span>
             </span>
