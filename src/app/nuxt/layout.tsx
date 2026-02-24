@@ -12,7 +12,12 @@ export default function NuxtLayout({
   return (
     <>
       <ESHeader />
-      <main className="min-h-screen">{children}</main>
+      <main
+        className="min-h-screen bg-cover bg-center bg-no-repeat bg-fixed"
+        style={{ backgroundImage: "url('/images/bg-landscape.png')" }}
+      >
+        {children}
+      </main>
       <ESFooter />
     </>
   );
