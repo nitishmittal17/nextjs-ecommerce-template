@@ -50,9 +50,10 @@ const GrooveHeader = () => {
 
       {/* Main header */}
       <header
-        className={`bg-white w-full z-[9999] transition-all duration-300 ${
+        className={`w-full z-[9999] transition-all duration-300 bg-cover bg-center bg-no-repeat ${
           stickyHeader ? "fixed top-0 left-0 shadow-md" : "relative"
         }`}
+        style={{ backgroundImage: "url('/images/bg-landscape.png')" }}
       >
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-4">
