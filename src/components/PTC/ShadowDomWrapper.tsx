@@ -1,46 +1,71 @@
 "use client";
-import React, { useRef, useState, useEffect, useCallback } from "react";
+import React, { useRef, useEffect, useState, useCallback } from "react";
 import { createPortal } from "react-dom";
 
-/**
- * ShadowDomWrapper
- *
- * Wraps its children inside an actual Shadow DOM boundary.
- * - Attaches a shadow root (mode: "open") to a host <div>
- * - Clones all stylesheets from the document <head> into the shadow root
- *   so that Tailwind CSS and other global styles still apply
- * - Uses React createPortal to render children into the shadow root
- */
-const ShadowDomWrapper = ({ children }: { children: React.ReactNode }) => {
+interface ShadowDomWrapperProps {
+  header?: React.ReactNode;
+  footer?: React.ReactNode;
+  children: React.ReactNode;
+}
+
+const SHADOW_TEMPLATE = `
+  <style>
+    :host {
+      display: block;
+    }
+    .shadow-wrapper {
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    .shadow-header {
+      flex-shrink: 0;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+    }
+    .shadow-main {
+      flex: 1 1 auto;
+    }
+    .shadow-footer {
+      flex-shrink: 0;
+    }
+  </style>
+  <div class="shadow-wrapper">
+    <div class="shadow-header" id="shadow-header-container"></div>
+    <div class="shadow-main" id="shadow-main-container"></div>
+    <div class="shadow-footer" id="shadow-footer-container"></div>
+  </div>
+`;
+
+const ShadowDomWrapper = ({
+  header,
+  footer,
+  children,
+}: ShadowDomWrapperProps) => {
   const hostRef = useRef<HTMLDivElement>(null);
-  const [shadowRoot, setShadowRoot] = useState<ShadowRoot | null>(null);
+  const [containers, setContainers] = useState<{
+    header: HTMLElement | null;
+    main: HTMLElement | null;
+    footer: HTMLElement | null;
+  }>({ header: null, main: null, footer: null });
 
   const injectStyles = useCallback((sr: ShadowRoot) => {
-    // Clone all <style> and <link rel="stylesheet"> from document head
-    const headElements = document.querySelectorAll(
-      'style, link[rel="stylesheet"]'
-    );
+    document
+      .querySelectorAll('style, link[rel="stylesheet"]')
+      .forEach((el) => sr.appendChild(el.cloneNode(true)));
 
-    headElements.forEach((el) => {
-      const clone = el.cloneNode(true) as HTMLElement;
-      sr.appendChild(clone);
-    });
-
-    // Also observe for new stylesheets added later (e.g., by Next.js HMR)
     const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        mutation.addedNodes.forEach((node) => {
-          if (node instanceof HTMLStyleElement) {
-            sr.appendChild(node.cloneNode(true));
-          }
+      for (const m of mutations) {
+        m.addedNodes.forEach((node) => {
           if (
-            node instanceof HTMLLinkElement &&
-            node.rel === "stylesheet"
+            node instanceof HTMLStyleElement ||
+            (node instanceof HTMLLinkElement && node.rel === "stylesheet")
           ) {
             sr.appendChild(node.cloneNode(true));
           }
         });
-      });
+      }
     });
 
     observer.observe(document.head, { childList: true });
@@ -48,38 +73,33 @@ const ShadowDomWrapper = ({ children }: { children: React.ReactNode }) => {
   }, []);
 
   useEffect(() => {
-    if (!hostRef.current) return;
+    const host = hostRef.current;
+    if (!host) return;
 
-    // Only attach once
-    if (hostRef.current.shadowRoot) {
-      setShadowRoot(hostRef.current.shadowRoot);
-      return;
+    let observer: MutationObserver | undefined;
+    let sr = host.shadowRoot;
+
+    if (!sr) {
+      sr = host.attachShadow({ mode: "open" });
+      sr.innerHTML = SHADOW_TEMPLATE;
+      observer = injectStyles(sr);
     }
 
-    const sr = hostRef.current.attachShadow({ mode: "open" });
+    setContainers({
+      header: sr.getElementById("shadow-header-container"),
+      main: sr.getElementById("shadow-main-container"),
+      footer: sr.getElementById("shadow-footer-container"),
+    });
 
-    // Create a container div inside shadow root for React to render into
-    const container = document.createElement("div");
-    container.id = "shadow-root-container";
-    sr.appendChild(container);
-
-    // Inject styles
-    const observer = injectStyles(sr);
-
-    setShadowRoot(sr);
-
-    return () => {
-      observer.disconnect();
-    };
+    return () => observer?.disconnect();
   }, [injectStyles]);
-
-  // Get the container element inside the shadow root
-  const portalTarget = shadowRoot?.getElementById("shadow-root-container");
 
   return (
     <>
       <div ref={hostRef} id="shadow-dom-host" style={{ display: "contents" }} />
-      {portalTarget && createPortal(children, portalTarget)}
+      {containers.header && header && createPortal(header, containers.header)}
+      {containers.main && createPortal(children, containers.main)}
+      {containers.footer && footer && createPortal(footer, containers.footer)}
     </>
   );
 };

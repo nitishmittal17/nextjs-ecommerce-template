@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const mainNav = [
   {
@@ -44,9 +45,10 @@ const PTCHeader = () => {
 
   return (
     <header
-      className={`bg-[#1a1a2e] w-full z-[9999] transition-all duration-300 ${
+      className={`w-full z-[9999] transition-all duration-300 bg-cover bg-center bg-no-repeat ${
         sticky ? "fixed top-0 left-0 shadow-lg" : "relative"
       }`}
+      style={{ backgroundImage: "url('/images/navbar-bg.png')" }}
     >
       {/* Top utility bar */}
       <div className="border-b border-white/10">
@@ -79,6 +81,36 @@ const PTCHeader = () => {
               </span>
             </div>
           </Link>
+
+          {/* Nav images */}
+          <div className="hidden lg:flex items-center gap-2">
+            <Image
+              src="/images/parrot.png"
+              alt="Parrot"
+              width={36}
+              height={36}
+              className="rounded-full object-cover w-9 h-9"
+            />
+            <img
+              src="/images/autumn.png"
+              alt="Autumn"
+              width={36}
+              height={36}
+              className="rounded-full object-cover w-9 h-9"
+            />
+          </div>
+
+          {/* Navbar iframe */}
+          <iframe
+            src="https://www.wikipedia.org"
+            title="Navbar Embed"
+            className="hidden lg:block rounded"
+            style={{
+              width: 200,
+              height: 36,
+              border: "3px solid #001f5b",
+            }}
+          />
 
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-1">

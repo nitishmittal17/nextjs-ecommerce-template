@@ -11,10 +11,11 @@ export default function ShadowDomLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ShadowDomWrapper>
-      <PTCHeader />
+    <ShadowDomWrapper
+      header={<PTCHeader />}
+      footer={<PTCFooter />}
+    >
       <main className="min-h-screen bg-[#0f0f23]">{children}</main>
-      <PTCFooter />
     </ShadowDomWrapper>
   );
 }
