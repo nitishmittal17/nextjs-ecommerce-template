@@ -15,7 +15,7 @@ export default function ShadowDomLayout({
       {/* Navbar iframe - outside shadow DOM */}
       <div className="bg-[#1a1a2e] flex justify-center py-2">
         <iframe
-          src="https://www.wikipedia.org"
+          src="https://nextjs-ecommerce-template-five.vercel.app/"
           title="Navbar Embed"
           className="rounded"
           style={{
@@ -37,7 +37,7 @@ export default function ShadowDomLayout({
       <div className="bg-[#0f0f23] py-12">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
           <iframe
-            src="https://www.wikipedia.org"
+            src="https://nextjs-ecommerce-template-five.vercel.app/"
             title="Body Embed"
             className="w-full rounded-lg"
             style={{
