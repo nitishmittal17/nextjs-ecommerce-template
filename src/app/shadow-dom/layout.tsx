@@ -11,11 +11,42 @@ export default function ShadowDomLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ShadowDomWrapper
-      header={<PTCHeader />}
-      footer={<PTCFooter />}
-    >
-      <main className="min-h-screen bg-[#0f0f23]">{children}</main>
-    </ShadowDomWrapper>
+    <>
+      {/* Navbar iframe - outside shadow DOM */}
+      <div className="bg-[#1a1a2e] flex justify-center py-2">
+        <iframe
+          src="https://www.wikipedia.org"
+          title="Navbar Embed"
+          className="rounded"
+          style={{
+            width: 200,
+            height: 36,
+            border: "3px solid #001f5b",
+          }}
+        />
+      </div>
+
+      <ShadowDomWrapper
+        header={<PTCHeader />}
+        footer={<PTCFooter />}
+      >
+        <main className="min-h-screen bg-[#0f0f23]">{children}</main>
+      </ShadowDomWrapper>
+
+      {/* Body iframe - outside shadow DOM */}
+      <div className="bg-[#0f0f23] py-12">
+        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
+          <iframe
+            src="https://www.wikipedia.org"
+            title="Body Embed"
+            className="w-full rounded-lg"
+            style={{
+              height: 400,
+              border: "4px solid #001f5b",
+            }}
+          />
+        </div>
+      </div>
+    </>
   );
 }

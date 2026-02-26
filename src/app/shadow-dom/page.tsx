@@ -87,21 +87,6 @@ export default function ShadowDomPage() {
         </div>
       </section>
 
-      {/* Embedded iframe */}
-      <section className="py-12">
-        <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-          <iframe
-            src="https://www.wikipedia.org"
-            title="Body Embed"
-            className="w-full rounded-lg"
-            style={{
-              height: 400,
-              border: "4px solid #001f5b",
-            }}
-          />
-        </div>
-      </section>
-
       {/* AI For sections */}
       <section className="bg-[#12122a] py-20">
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">

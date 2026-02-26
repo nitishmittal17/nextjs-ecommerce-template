@@ -100,18 +100,6 @@ const PTCHeader = () => {
             />
           </div>
 
-          {/* Navbar iframe */}
-          <iframe
-            src="https://www.wikipedia.org"
-            title="Navbar Embed"
-            className="hidden lg:block rounded"
-            style={{
-              width: 200,
-              height: 36,
-              border: "3px solid #001f5b",
-            }}
-          />
-
           {/* Desktop nav */}
           <nav className="hidden lg:flex items-center gap-1">
             {mainNav.map((item, idx) =>
