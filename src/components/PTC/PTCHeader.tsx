@@ -98,17 +98,6 @@ const PTCHeader = () => {
               height={36}
               className="rounded-full object-cover w-9 h-9"
             />
-            <picture>
-              <source srcSet="https://picsum.photos/id/1015/800/500.webp" type="image/webp" />
-              <source srcSet="https://picsum.photos/id/1015/800/500.jpg" type="image/jpeg" />
-              <img
-                src="https://picsum.photos/id/1015/800/500.jpg"
-                alt="Mountain landscape with lake"
-                width={800}
-                height={500}
-                loading="lazy"
-              />
-            </picture>
           </div>
 
           {/* Desktop nav */}
@@ -177,6 +166,17 @@ const PTCHeader = () => {
               )}
             </svg>
           </button>
+
+          <picture className="flex-shrink-0">
+            <source srcSet="https://picsum.photos/id/1015/800/500.webp" type="image/webp" />
+            <source srcSet="https://picsum.photos/id/1015/800/500.jpg" type="image/jpeg" />
+            <img
+              src="https://picsum.photos/id/1015/800/500.jpg"
+              alt="Mountain landscape with lake"
+              className="h-10 w-auto object-contain rounded"
+              loading="lazy"
+            />
+          </picture>
         </div>
       </div>
 

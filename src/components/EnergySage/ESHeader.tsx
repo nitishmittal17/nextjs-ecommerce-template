@@ -76,17 +76,6 @@ const ESHeader = () => {
               height={40}
               className="rounded-full object-cover"
             />
-            <picture>
-              <source srcSet="https://picsum.photos/id/1015/800/500.webp" type="image/webp" />
-              <source srcSet="https://picsum.photos/id/1015/800/500.jpg" type="image/jpeg" />
-              <img
-                src="https://picsum.photos/id/1015/800/500.jpg"
-                alt="Mountain landscape with lake"
-                width={800}
-                height={500}
-                loading="lazy"
-              />
-            </picture>
             <span className="text-xl font-bold text-[#333]">
               Energy<span className="text-[#f26522]">Sage</span>
             </span>
@@ -164,6 +153,17 @@ const ESHeader = () => {
               )}
             </svg>
           </button>
+
+          <picture className="flex-shrink-0">
+            <source srcSet="https://picsum.photos/id/1015/800/500.webp" type="image/webp" />
+            <source srcSet="https://picsum.photos/id/1015/800/500.jpg" type="image/jpeg" />
+            <img
+              src="https://picsum.photos/id/1015/800/500.jpg"
+              alt="Mountain landscape with lake"
+              className="h-12 w-auto object-contain rounded"
+              loading="lazy"
+            />
+          </picture>
         </div>
       </div>
 
