@@ -15,6 +15,7 @@ export default function RootLayout({
   const isReactPage = pathname.startsWith('/react');
   const isNuxtPage = pathname.startsWith('/nuxt');
   const isShadowDomPage = pathname.startsWith('/shadow-dom');
+  const isVuePage = pathname.startsWith('/vue');
 
   return (
     <html lang="en" suppressHydrationWarning={true}>
@@ -45,12 +46,14 @@ export default function RootLayout({
           />
         )}
 
-        {/* VWO SmartCode */}
-        <script
-          referrerPolicy="no-referrer-when-downgrade"
-          src="https://dev.visualwebsiteoptimizer.com/tag/1209051.js"
-          id="vwoCode"
-        ></script>
+        {/* VWO SmartCode - excluded for /vue pages */}
+        {!isVuePage && (
+          <script
+            referrerPolicy="no-referrer-when-downgrade"
+            src="https://dev.visualwebsiteoptimizer.com/tag/1209051.js"
+            id="vwoCode"
+          ></script>
+        )}
 
         {/* AB Tasty script - for home page and performance test page */}
         {isHomePage && (
@@ -97,6 +100,15 @@ export default function RootLayout({
         {isShadowDomPage && (
           <Script
             id="abtasty-shadow-dom"
+            src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
+            strategy="beforeInteractive"
+          />
+        )}
+
+        {/* AB Tasty script - for /vue pages */}
+        {isVuePage && (
+          <Script
+            id="abtasty-vue"
             src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
             strategy="beforeInteractive"
           />
