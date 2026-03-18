@@ -15,6 +15,7 @@ export default function RootLayout({
   const isReactPage = pathname.startsWith('/react');
   const isNuxtPage = pathname.startsWith('/nuxt');
   const isShadowDomPage = pathname.startsWith('/shadow-dom');
+  const isNestedShadowDomPage = pathname.startsWith('/nestedShadowDom');
   const isVuePage = pathname.startsWith('/vue');
 
   return (
@@ -100,6 +101,15 @@ export default function RootLayout({
         {isShadowDomPage && (
           <Script
             id="abtasty-shadow-dom"
+            src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
+            strategy="beforeInteractive"
+          />
+        )}
+
+        {/* AB Tasty script - for /nestedShadowDom pages */}
+        {isNestedShadowDomPage && (
+          <Script
+            id="abtasty-nested-shadow-dom"
             src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
             strategy="beforeInteractive"
           />
