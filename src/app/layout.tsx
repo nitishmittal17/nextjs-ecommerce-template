@@ -124,6 +124,24 @@ f=false,w=window,d=document,v=d.querySelector('#vwoCode'),cK='_vwo_'+account_id+
           />
         )}
 
+        {/* AB Tasty script - for /nuxt2 pages */}
+        {isNuxt2Page && (
+          <Script
+            id="abtasty-nuxt2"
+            src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
+            strategy="beforeInteractive"
+          />
+        )}
+
+        {/* AB Tasty script - for /react2 pages */}
+        {isReact2Page && (
+          <Script
+            id="abtasty-react2"
+            src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
+            strategy="beforeInteractive"
+          />
+        )}
+
         {/* AB Tasty script - for /shadow-dom pages */}
         {isShadowDomPage && (
           <Script
