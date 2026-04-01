@@ -77,7 +77,7 @@ f=false,w=window,d=document,v=d.querySelector('#vwoCode'),cK='_vwo_'+account_id+
             <link rel="preconnect" href="https://dev.visualwebsiteoptimizer.com" />
             <Script
               id="vwoCodeCloudRun"
-              src="https://dev.visualwebsiteoptimizer.com/cloud-run-test/final/1215818.js"
+              src="https://dev.visualwebsiteoptimizer.com/tag/1215818.js"
               strategy="beforeInteractive"
             />
           </>
