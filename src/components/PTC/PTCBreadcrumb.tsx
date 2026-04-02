@@ -5,12 +5,18 @@ interface BreadcrumbItem {
   path?: string;
 }
 
-const PTCBreadcrumb = ({ items }: { items: BreadcrumbItem[] }) => {
+const PTCBreadcrumb = ({
+  items,
+  homeHref = "/shadow-dom",
+}: {
+  items: BreadcrumbItem[];
+  homeHref?: string;
+}) => {
   return (
     <div className="bg-[#12122a] border-b border-white/5 py-3">
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <nav className="flex items-center gap-2 text-sm">
-          <Link href="/shadow-dom" className="text-[#00a651] hover:text-[#00c45e] transition-colors">
+          <Link href={homeHref} className="text-[#00a651] hover:text-[#00c45e] transition-colors">
             Home
           </Link>
           {items.map((item, idx) => (

@@ -1,38 +1,50 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
-const mainNav = [
-  {
-    title: "Products",
-    submenu: [
-      { title: "All Products", path: "/shadow-dom/products" },
-      { title: "AI at PTC", path: "/shadow-dom/ai" },
-      { title: "Digital Thread", path: "/shadow-dom/digital-thread" },
-    ],
-  },
-  {
-    title: "Solutions",
-    submenu: [
-      { title: "Solutions Overview", path: "/shadow-dom/solutions" },
-      { title: "Case Studies", path: "/shadow-dom/case-studies" },
-    ],
-  },
-  { title: "Partners", path: "/shadow-dom/partners" },
-  { title: "News", path: "/shadow-dom/news" },
-  { title: "Events", path: "/shadow-dom/events" },
-];
+function buildMainNav(basePath: string) {
+  const b = basePath.replace(/\/$/, "");
+  return [
+    {
+      title: "Products",
+      submenu: [
+        { title: "All Products", path: `${b}/products` },
+        { title: "AI at PTC", path: `${b}/ai` },
+        { title: "Digital Thread", path: `${b}/digital-thread` },
+      ],
+    },
+    {
+      title: "Solutions",
+      submenu: [
+        { title: "Solutions Overview", path: `${b}/solutions` },
+        { title: "Case Studies", path: `${b}/case-studies` },
+      ],
+    },
+    { title: "Partners", path: `${b}/partners` },
+    { title: "News", path: `${b}/news` },
+    { title: "Events", path: `${b}/events` },
+  ];
+}
 
-const utilityNav = [
-  { title: "Support", path: "/shadow-dom/support" },
-  { title: "Training", path: "/shadow-dom/training" },
-  { title: "About", path: "/shadow-dom/about" },
-  { title: "Careers", path: "/shadow-dom/careers" },
-  { title: "Contact", path: "/shadow-dom/contact" },
-];
+function buildUtilityNav(basePath: string) {
+  const b = basePath.replace(/\/$/, "");
+  return [
+    { title: "Support", path: `${b}/support` },
+    { title: "Training", path: `${b}/training` },
+    { title: "About", path: `${b}/about` },
+    { title: "Careers", path: `${b}/careers` },
+    { title: "Contact", path: `${b}/contact` },
+  ];
+}
 
-const PTCHeader = () => {
+interface PTCHeaderProps {
+  basePath?: string;
+}
+
+const PTCHeader = ({ basePath = "/shadow-dom" }: PTCHeaderProps) => {
+  const mainNav = useMemo(() => buildMainNav(basePath), [basePath]);
+  const utilityNav = useMemo(() => buildUtilityNav(basePath), [basePath]);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
   const [sticky, setSticky] = useState(false);
@@ -71,7 +83,7 @@ const PTCHeader = () => {
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-14">
           {/* Logo */}
-          <Link href="/shadow-dom" className="flex items-center gap-2 flex-shrink-0">
+          <Link href={basePath} className="flex items-center gap-2 flex-shrink-0">
             <div className="flex items-center gap-1.5">
               <div className="w-8 h-8 bg-[#00a651] rounded flex items-center justify-center">
                 <span className="text-white font-black text-xs">PTC</span>
@@ -145,7 +157,7 @@ const PTCHeader = () => {
           {/* Right CTA */}
           <div className="hidden lg:flex items-center gap-3">
             <Link
-              href="/shadow-dom/contact"
+              href={`${basePath.replace(/\/$/, "")}/contact`}
               className="bg-[#00a651] text-white px-4 py-2 rounded text-sm font-medium hover:bg-[#008c44] transition-colors"
             >
               Contact Expert

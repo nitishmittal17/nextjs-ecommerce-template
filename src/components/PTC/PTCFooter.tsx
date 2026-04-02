@@ -1,8 +1,13 @@
 import React from "react";
 import Link from "next/link";
 
-const PTCFooter = () => {
+interface PTCFooterProps {
+  basePath?: string;
+}
+
+const PTCFooter = ({ basePath = "/shadow-dom" }: PTCFooterProps) => {
   const year = new Date().getFullYear();
+  const b = basePath.replace(/\/$/, "");
 
   return (
     <footer className="bg-[#0d0d1a] text-white">
@@ -15,12 +20,12 @@ const PTCFooter = () => {
             </h4>
             <ul className="flex flex-col gap-2.5">
               {[
-                { label: "About PTC", href: "/shadow-dom/about" },
-                { label: "Products", href: "/shadow-dom/products" },
-                { label: "Solutions", href: "/shadow-dom/solutions" },
-                { label: "AI at PTC", href: "/shadow-dom/ai" },
-                { label: "Digital Thread", href: "/shadow-dom/digital-thread" },
-                { label: "Case Studies", href: "/shadow-dom/case-studies" },
+                { label: "About PTC", href: `${b}/about` },
+                { label: "Products", href: `${b}/products` },
+                { label: "Solutions", href: `${b}/solutions` },
+                { label: "AI at PTC", href: `${b}/ai` },
+                { label: "Digital Thread", href: `${b}/digital-thread` },
+                { label: "Case Studies", href: `${b}/case-studies` },
               ].map((link, idx) => (
                 <li key={idx}>
                   <Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">
@@ -38,10 +43,10 @@ const PTCFooter = () => {
             </h4>
             <ul className="flex flex-col gap-2.5">
               {[
-                { label: "Support Portal", href: "/shadow-dom/support" },
-                { label: "PTC University", href: "/shadow-dom/training" },
-                { label: "Partners", href: "/shadow-dom/partners" },
-                { label: "Contact an Expert", href: "/shadow-dom/contact" },
+                { label: "Support Portal", href: `${b}/support` },
+                { label: "PTC University", href: `${b}/training` },
+                { label: "Partners", href: `${b}/partners` },
+                { label: "Contact an Expert", href: `${b}/contact` },
               ].map((link, idx) => (
                 <li key={idx}>
                   <Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">
@@ -59,11 +64,11 @@ const PTCFooter = () => {
             </h4>
             <ul className="flex flex-col gap-2.5">
               {[
-                { label: "News", href: "/shadow-dom/news" },
-                { label: "Events", href: "/shadow-dom/events" },
-                { label: "Careers", href: "/shadow-dom/careers" },
-                { label: "Leadership", href: "/shadow-dom/about" },
-                { label: "Investor Relations", href: "/shadow-dom/about" },
+                { label: "News", href: `${b}/news` },
+                { label: "Events", href: `${b}/events` },
+                { label: "Careers", href: `${b}/careers` },
+                { label: "Leadership", href: `${b}/about` },
+                { label: "Investor Relations", href: `${b}/about` },
               ].map((link, idx) => (
                 <li key={idx}>
                   <Link href={link.href} className="text-sm text-gray-400 hover:text-white transition-colors">
@@ -105,7 +110,7 @@ const PTCFooter = () => {
               {["Legal", "Trust Center", "Privacy Policy"].map((item) => (
                 <Link
                   key={item}
-                  href="/shadow-dom"
+                  href={b}
                   className="text-xs text-gray-500 hover:text-white transition-colors"
                 >
                   {item}

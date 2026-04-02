@@ -14,11 +14,13 @@ export default function RootLayout({
   const isPerformanceTestAbTastyPage = pathname === '/performance-test-abtasty';
   const isReactPage = pathname === '/react' || pathname.startsWith('/react/');
   const isNuxtPage = pathname === '/nuxt' || pathname.startsWith('/nuxt/');
-  const isShadowDomPage = pathname.startsWith('/shadow-dom');
+  const isShadowDomPage =
+    pathname === '/shadow-dom' || pathname.startsWith('/shadow-dom/');
   const isNestedShadowDomPage = pathname.startsWith('/nestedShadowDom');
   const isVuePage = pathname.startsWith('/vue');
   const isNuxt2Page = pathname.startsWith('/nuxt2');
   const isReact2Page = pathname.startsWith('/react2');
+  const isShadowDom2Page = pathname.startsWith('/shadow-dom-2');
 
   return (
     <html lang="en" suppressHydrationWarning={true}>
@@ -49,8 +51,8 @@ export default function RootLayout({
           />
         )}
 
-        {/* VWO Async SmartCode - excluded for /vue, /nuxt2, /react2 pages */}
-        {!isVuePage && !isNuxt2Page && !isReact2Page && (
+        {/* VWO Async SmartCode - excluded for /vue, /nuxt2, /react2, /shadow-dom-2 pages */}
+        {!isVuePage && !isNuxt2Page && !isReact2Page && !isShadowDom2Page && (
           <>
             <link rel="preconnect" href="https://dev.visualwebsiteoptimizer.com" />
             <Script
@@ -71,8 +73,8 @@ f=false,w=window,d=document,v=d.querySelector('#vwoCode'),cK='_vwo_'+account_id+
           </>
         )}
 
-        {/* VWO Cloud Run Script - for /nuxt2 and /react2 pages */}
-        {(isNuxt2Page || isReact2Page) && (
+        {/* VWO Cloud Run Script - for /nuxt2, /react2, and /shadow-dom-2 pages */}
+        {(isNuxt2Page || isReact2Page || isShadowDom2Page) && (
           <>
             <link rel="preconnect" href="https://dev.visualwebsiteoptimizer.com" />
             <Script
@@ -137,6 +139,15 @@ f=false,w=window,d=document,v=d.querySelector('#vwoCode'),cK='_vwo_'+account_id+
         {isReact2Page && (
           <Script
             id="abtasty-react2"
+            src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
+            strategy="beforeInteractive"
+          />
+        )}
+
+        {/* AB Tasty script - for /shadow-dom-2 pages (same tag as react2) */}
+        {isShadowDom2Page && (
+          <Script
+            id="abtasty-shadow-dom-2"
             src="https://try.abtasty.com/81677aa3dd7b49d4a23ac9870dfee7ce.js"
             strategy="beforeInteractive"
           />
