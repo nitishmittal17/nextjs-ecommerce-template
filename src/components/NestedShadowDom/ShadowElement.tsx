@@ -1,101 +1,253 @@
 "use client";
-import React, { useRef, useEffect, useState } from "react";
+
+import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
+type ShadowDepth = 1 | 2 | 3;
+
 interface ShadowElementProps {
-  as: string;
+  as?: string;
+  attrs?: Record<string, string>;
   children?: React.ReactNode;
   className?: string;
-  style?: React.CSSProperties;
+  depth?: ShadowDepth;
+  injectGlobalStyles?: boolean;
+  label?: string;
   shadowCSS?: string;
   shadowTemplate?: string;
-  injectGlobalStyles?: boolean;
-  attrs?: Record<string, string>;
+  style?: React.CSSProperties;
 }
 
-export default function ShadowElement({
-  as: tagName,
+const cloneDocumentStyles = (shadowRoot: ShadowRoot) => {
+  document
+    .querySelectorAll('style, link[rel="stylesheet"]')
+    .forEach((node) => shadowRoot.appendChild(node.cloneNode(true)));
+
+  const observer = new MutationObserver((mutations) => {
+    for (const mutation of mutations) {
+      mutation.addedNodes.forEach((node) => {
+        if (
+          node instanceof HTMLStyleElement ||
+          (node instanceof HTMLLinkElement && node.rel === "stylesheet")
+        ) {
+          shadowRoot.appendChild(node.cloneNode(true));
+        }
+      });
+    }
+  });
+
+  observer.observe(document.head, { childList: true });
+  return () => observer.disconnect();
+};
+
+const nestedShadowTemplate = (
+  level: number,
+  isMountLevel: boolean,
+  label?: string,
+) => `
+  <style>
+    :host {
+      display: block;
+    }
+
+    .shadow-shell {
+      display: block;
+      min-height: 100%;
+      border: 1px solid rgba(129, 140, 248, 0.45);
+      border-radius: 22px;
+      padding: 14px;
+      background:
+        radial-gradient(circle at top right, rgba(59, 130, 246, 0.2), transparent 34%),
+        rgba(15, 23, 42, 0.84);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    }
+
+    .shadow-shell[data-level="2"] {
+      border-color: rgba(45, 212, 191, 0.45);
+      background:
+        radial-gradient(circle at top left, rgba(45, 212, 191, 0.18), transparent 34%),
+        rgba(15, 23, 42, 0.76);
+    }
+
+    .shadow-shell[data-level="3"] {
+      border-color: rgba(251, 191, 36, 0.5);
+      background:
+        radial-gradient(circle at bottom right, rgba(251, 191, 36, 0.16), transparent 34%),
+        rgba(15, 23, 42, 0.7);
+    }
+
+    .shadow-label {
+      display: inline-flex;
+      margin-bottom: 12px;
+      border-radius: 999px;
+      padding: 4px 10px;
+      background: rgba(255, 255, 255, 0.08);
+      color: rgb(226, 232, 240);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .nested-host {
+      display: block;
+    }
+  </style>
+  <div class="shadow-shell" data-level="${level}">
+    <span class="shadow-label">${label ?? `Shadow root level ${level}`}</span>
+    <div class="${isMountLevel ? "" : "nested-host"}" id="${
+      isMountLevel ? "shadow-content-mount" : "next-shadow-host"
+    }"></div>
+  </div>
+`;
+
+function LegacyShadowElement({
+  as = "div",
+  attrs,
   children,
   className,
-  style: inlineStyle,
+  injectGlobalStyles = false,
   shadowCSS,
   shadowTemplate = "<slot></slot>",
-  injectGlobalStyles = false,
-  attrs,
+  style,
 }: ShadowElementProps) {
   const hostRef = useRef<HTMLDivElement>(null);
-  const elRef = useRef<HTMLElement | null>(null);
+  const elementRef = useRef<HTMLElement | null>(null);
   const [target, setTarget] = useState<HTMLElement | null>(null);
-
-  const tagNameRef = useRef(tagName);
-  const classNameRef = useRef(className);
-  const inlineStyleRef = useRef(inlineStyle);
-  const shadowCSSRef = useRef(shadowCSS);
-  const shadowTemplateRef = useRef(shadowTemplate);
-  const injectGlobalStylesRef = useRef(injectGlobalStyles);
-  const attrsRef = useRef(attrs);
 
   useEffect(() => {
     const host = hostRef.current;
-    if (!host || elRef.current) return;
+    if (!host || elementRef.current) return;
 
-    const el = document.createElement(tagNameRef.current);
-    el.classList.add("hydrated");
-    if (classNameRef.current)
-      classNameRef.current
-        .split(/\s+/)
-        .forEach((c) => c && el.classList.add(c));
-    if (inlineStyleRef.current) Object.assign(el.style, inlineStyleRef.current);
-    if (attrsRef.current)
-      Object.entries(attrsRef.current).forEach(([k, v]) => el.setAttribute(k, v));
+    const element = document.createElement(as);
+    element.classList.add("hydrated");
 
-    const sr = el.attachShadow({ mode: "open" });
-
-    if (shadowCSSRef.current) {
-      const s = document.createElement("style");
-      s.textContent = shadowCSSRef.current;
-      sr.appendChild(s);
-    }
-
-    let obs: MutationObserver | undefined;
-    if (injectGlobalStylesRef.current) {
-      document
-        .querySelectorAll('style, link[rel="stylesheet"]')
-        .forEach((n) => sr.appendChild(n.cloneNode(true)));
-      obs = new MutationObserver((muts) => {
-        for (const m of muts) {
-          m.addedNodes.forEach((node) => {
-            if (
-              node instanceof HTMLStyleElement ||
-              (node instanceof HTMLLinkElement &&
-                node.rel === "stylesheet")
-            )
-              sr.appendChild(node.cloneNode(true));
-          });
-        }
+    if (className) {
+      className.split(/\s+/).forEach((classToken) => {
+        if (classToken) element.classList.add(classToken);
       });
-      obs.observe(document.head, { childList: true });
     }
 
-    const tmpl = document.createElement("template");
-    tmpl.innerHTML = shadowTemplateRef.current;
-    sr.appendChild(tmpl.content.cloneNode(true));
+    if (style) Object.assign(element.style, style);
 
-    host.appendChild(el);
-    elRef.current = el;
-    setTarget(el);
+    if (attrs) {
+      Object.entries(attrs).forEach(([key, value]) => {
+        element.setAttribute(key, value);
+      });
+    }
+
+    const shadowRoot = element.attachShadow({ mode: "open" });
+
+    if (shadowCSS) {
+      const styleElement = document.createElement("style");
+      styleElement.textContent = shadowCSS;
+      shadowRoot.appendChild(styleElement);
+    }
+
+    const cleanupStyles = injectGlobalStyles
+      ? cloneDocumentStyles(shadowRoot)
+      : undefined;
+
+    const template = document.createElement("template");
+    template.innerHTML = shadowTemplate;
+    shadowRoot.appendChild(template.content.cloneNode(true));
+
+    host.appendChild(element);
+    elementRef.current = element;
+    setTarget(element);
 
     return () => {
-      obs?.disconnect();
-      el.remove();
-      elRef.current = null;
+      cleanupStyles?.();
+      setTarget(null);
+      element.remove();
+      elementRef.current = null;
     };
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [
+    as,
+    attrs,
+    children,
+    className,
+    injectGlobalStyles,
+    shadowCSS,
+    shadowTemplate,
+    style,
+  ]);
 
   return (
     <div ref={hostRef} style={{ display: "contents" }}>
       {target && createPortal(children, target)}
     </div>
   );
+}
+
+function NestedShadowElement({
+  children,
+  className,
+  depth = 1,
+  label,
+  style,
+}: ShadowElementProps) {
+  const hostRef = useRef<HTMLDivElement>(null);
+  const [mountNode, setMountNode] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    const host = hostRef.current;
+    if (!host) return;
+
+    const cleanups: Array<() => void> = [];
+    const outerHost = document.createElement("section");
+    outerHost.setAttribute("data-shadow-host", "level-1");
+    outerHost.style.display = "block";
+    host.appendChild(outerHost);
+
+    let currentShadowRoot = outerHost.attachShadow({ mode: "open" });
+
+    for (let level = 1; level <= depth; level += 1) {
+      const isMountLevel = level === depth;
+      currentShadowRoot.innerHTML = nestedShadowTemplate(
+        level,
+        isMountLevel,
+        level === depth ? label : undefined,
+      );
+      cleanups.push(cloneDocumentStyles(currentShadowRoot));
+
+      if (isMountLevel) {
+        setMountNode(currentShadowRoot.getElementById("shadow-content-mount"));
+        break;
+      }
+
+      const nextHostContainer = currentShadowRoot.getElementById("next-shadow-host");
+      const nestedHost = document.createElement("section");
+      nestedHost.setAttribute("data-shadow-host", `level-${level + 1}`);
+      nestedHost.style.display = "block";
+      nextHostContainer?.appendChild(nestedHost);
+      currentShadowRoot = nestedHost.attachShadow({ mode: "open" });
+    }
+
+    return () => {
+      cleanups.forEach((cleanup) => cleanup());
+      setMountNode(null);
+      outerHost.remove();
+    };
+  }, [depth, label]);
+
+  return (
+    <div
+      ref={hostRef}
+      className={className}
+      data-shadow-depth={depth}
+      style={style}
+    >
+      {mountNode && createPortal(children, mountNode)}
+    </div>
+  );
+}
+
+export default function ShadowElement(props: ShadowElementProps) {
+  if (props.as) {
+    return <LegacyShadowElement {...props} />;
+  }
+
+  return <NestedShadowElement {...props} />;
 }

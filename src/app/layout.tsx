@@ -51,8 +51,8 @@ export default function RootLayout({
           />
         )}
 
-        {/* VWO Async SmartCode - excluded for /vue, /nuxt2, /react2, /shadow-dom-2 pages */}
-        {!isVuePage && !isNuxt2Page && !isReact2Page && !isShadowDom2Page && (
+        {/* VWO Async SmartCode - excluded for /vue, /nuxt2, /react2, /shadow-dom-2, /nestedShadowDom pages */}
+        {!isVuePage && !isNuxt2Page && !isReact2Page && !isShadowDom2Page && !isNestedShadowDomPage && (
           <>
             <link rel="preconnect" href="https://dev.visualwebsiteoptimizer.com" />
             <Script
@@ -73,8 +73,8 @@ f=false,w=window,d=document,v=d.querySelector('#vwoCode'),cK='_vwo_'+account_id+
           </>
         )}
 
-        {/* VWO Cloud Run Script - for /nuxt2, /react2, and /shadow-dom-2 pages */}
-        {(isNuxt2Page || isReact2Page || isShadowDom2Page) && (
+        {/* VWO Cloud Run Script - for /nuxt2, /react2, /shadow-dom-2, and /nestedShadowDom pages */}
+        {(isNuxt2Page || isReact2Page || isShadowDom2Page || isNestedShadowDomPage) && (
           <>
             <link rel="preconnect" href="https://dev.visualwebsiteoptimizer.com" />
             <Script

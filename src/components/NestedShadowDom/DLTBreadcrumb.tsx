@@ -5,30 +5,26 @@ interface BreadcrumbItem {
   path?: string;
 }
 
-const DLTBreadcrumb = ({ items }: { items: BreadcrumbItem[] }) => {
+export default function DLTBreadcrumb({ items }: { items: BreadcrumbItem[] }) {
   return (
-    <div className="bg-[#0d4a2a] border-b border-white/5 py-3">
-      <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
-        <nav className="flex items-center gap-2 text-sm">
-          <Link href="/nestedShadowDom" className="text-green-400 hover:text-green-300 transition-colors">
-            Home
-          </Link>
-          {items.map((item, idx) => (
-            <span key={idx} className="flex items-center gap-2">
-              <span className="text-green-800">/</span>
-              {item.path ? (
-                <Link href={item.path} className="text-green-400 hover:text-green-300 transition-colors">
-                  {item.label}
-                </Link>
-              ) : (
-                <span className="text-green-100 font-medium">{item.label}</span>
-              )}
-            </span>
-          ))}
-        </nav>
-      </div>
+    <div className="border-b border-white/10 bg-slate-900 px-4 py-3 text-sm text-white sm:px-6 lg:px-8">
+      <nav className="mx-auto flex max-w-7xl flex-wrap items-center gap-2">
+        <Link href="/nestedShadowDom" className="font-bold text-sky-300 hover:text-sky-200">
+          Nested DOM Lab
+        </Link>
+        {items.map((item) => (
+          <span key={item.label} className="flex items-center gap-2 text-slate-400">
+            <span>/</span>
+            {item.path ? (
+              <Link href={item.path} className="text-sky-300 hover:text-sky-200">
+                {item.label}
+              </Link>
+            ) : (
+              <span className="text-slate-100">{item.label}</span>
+            )}
+          </span>
+        ))}
+      </nav>
     </div>
   );
-};
-
-export default DLTBreadcrumb;
+}
