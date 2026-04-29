@@ -20,6 +20,9 @@ const destinations = [
   { label: "Shadow DOM 2", href: "/shadow-dom-2" },
 ];
 
+const iframeSourceUrl =
+  "https://nextjs-ecommerce-template-five.vercel.app/nestedShadowDom";
+
 const escapeHtmlAttribute = (value: string) =>
   value
     .replace(/&/g, "&amp;")
@@ -65,6 +68,7 @@ const renderFrameDocument = ({
       <iframe
         class="nested-frame"
         title="${escapeHtmlAttribute(`${title} nested iframe level ${level + 1}`)}"
+        src="${iframeSourceUrl}"
         srcdoc="${escapeHtmlAttribute(childDocument)}"
         sandbox="allow-top-navigation-by-user-activation"
       ></iframe>
@@ -187,6 +191,7 @@ export function NestedIframeElement({
     <iframe
       className="min-h-[430px] w-full rounded-[22px] border border-sky-300/30 bg-slate-950 shadow-2xl shadow-sky-950/40"
       sandbox="allow-top-navigation-by-user-activation"
+      src={iframeSourceUrl}
       srcDoc={renderFrameDocument({
         description,
         level: 1,
