@@ -185,10 +185,11 @@ export default function NestedShadowDomPage() {
                   </p>
                   <h3 className="mt-1 text-xl font-black">{section.title}</h3>
                 </div>
-                <iframe>
-                  Hi there!
-                  <a href="/react2">React2</a>
-                </iframe>
+                <NestedIframeElement
+                  description={section.description}
+                  depth={section.depth}
+                  title={section.title}
+                />
               </section>
             ))}
           </div>

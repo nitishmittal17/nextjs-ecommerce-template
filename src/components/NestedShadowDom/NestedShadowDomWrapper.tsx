@@ -192,12 +192,12 @@ export function NestedIframeElement({
       className="min-h-[430px] w-full rounded-[22px] border border-sky-300/30 bg-slate-950 shadow-2xl shadow-sky-950/40"
       sandbox="allow-top-navigation-by-user-activation"
       src={iframeSourceUrl}
-      srcDoc={renderFrameDocument({
-        description,
-        level: 1,
-        maxDepth: depth,
-        title,
-      })}
+      // srcDoc={renderFrameDocument({
+      //   description,
+      //   level: 1,
+      //   maxDepth: depth,
+      //   title,
+      // })}
       title={title}
     />
   );
