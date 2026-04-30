@@ -187,8 +187,8 @@ export default function NestedShadowDomPage() {
                 </div>
                 <iframe>
                   Hi there!
-                  <button onClick={() => window.location.href = "/react2"}>React2</button>
-                  </iframe>
+                  <a href="/react2">React2</a>
+                </iframe>
               </section>
             ))}
           </div>
