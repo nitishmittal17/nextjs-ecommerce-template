@@ -70,7 +70,7 @@ const renderFrameDocument = ({
         title="${escapeHtmlAttribute(`${title} nested iframe level ${level + 1}`)}"
         src="${iframeSourceUrl}"
         srcdoc="${escapeHtmlAttribute(childDocument)}"
-        sandbox="allow-top-navigation-by-user-activation"
+        sandbox="allow-same-origin allow-top-navigation-by-user-activation"
       ></iframe>
     `;
 
@@ -190,14 +190,14 @@ export function NestedIframeElement({
   return (
     <iframe
       className="min-h-[430px] w-full rounded-[22px] border border-sky-300/30 bg-slate-950 shadow-2xl shadow-sky-950/40"
-      sandbox="allow-top-navigation-by-user-activation"
-      src={iframeSourceUrl}
-      // srcDoc={renderFrameDocument({
-      //   description,
-      //   level: 1,
-      //   maxDepth: depth,
-      //   title,
-      // })}
+      sandbox="allow-same-origin allow-top-navigation-by-user-activation"
+      // src={iframeSourceUrl}
+      srcDoc={renderFrameDocument({
+        description,
+        level: 1,
+        maxDepth: depth,
+        title,
+      })}
       title={title}
     />
   );
