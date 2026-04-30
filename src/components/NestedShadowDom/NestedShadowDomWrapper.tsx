@@ -34,7 +34,7 @@ const renderFrameActions = () =>
   destinations
     .map(
       (destination) => `
-        <a class="demo-button" href="${destination.href}" target="_top">
+        <a class="demo-button" href="${destination.href}">
           ${destination.label}
         </a>
       `,
