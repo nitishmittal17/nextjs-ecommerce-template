@@ -128,7 +128,7 @@ export default function ContactPage() {
                       <p className="text-xs text-[#7c6f64] mt-1">
                         Commercial address only. For returns, see our{" "}
                         <a
-                          href="/react/returns"
+                          href="/react2/returns"
                           className="underline hover:text-[#2d2926]"
                         >
                           returns page

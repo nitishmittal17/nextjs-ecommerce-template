@@ -160,10 +160,10 @@ export default function ContactPage() {
                 <h3 className="font-semibold text-[#333] mb-3">Quick Links</h3>
                 <ul className="space-y-2">
                   {[
-                    { label: "Solar Calculator", href: "/nuxt/solar-calculator" },
-                    { label: "Solar Incentives", href: "/nuxt/solar-incentives" },
-                    { label: "Home Solar Guide", href: "/nuxt/home-solar" },
-                    { label: "How to Pay for Solar", href: "/nuxt/financing" },
+                    { label: "Solar Calculator", href: "/nuxt2/solar-calculator" },
+                    { label: "Solar Incentives", href: "/nuxt2/solar-incentives" },
+                    { label: "Home Solar Guide", href: "/nuxt2/home-solar" },
+                    { label: "How to Pay for Solar", href: "/nuxt2/financing" },
                   ].map((link, idx) => (
                     <li key={idx}>
                       <Link

@@ -84,7 +84,7 @@ export default function SolarPanelCostPage() {
               </div>
 
               <Link
-                href="/nuxt/solar-calculator"
+                href="/nuxt2/solar-calculator"
                 className="inline-block bg-[#f26522] text-white px-8 py-3.5 rounded-md font-semibold hover:bg-[#d4551a] transition-colors text-sm"
               >
                 Calculate Your Solar Cost
@@ -131,12 +131,12 @@ export default function SolarPanelCostPage() {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {[
-              { title: "Home Solar", href: "/nuxt/home-solar", icon: "☀️" },
-              { title: "Batteries", href: "/nuxt/home-batteries", icon: "🔋" },
-              { title: "EV Charging", href: "/nuxt/ev-charging", icon: "⚡" },
-              { title: "Heat Pumps", href: "/nuxt/heat-pumps", icon: "🌡️" },
-              { title: "Calculator", href: "/nuxt/solar-calculator", icon: "🔢" },
-              { title: "Incentives", href: "/nuxt/solar-incentives", icon: "💰" },
+              { title: "Home Solar", href: "/nuxt2/home-solar", icon: "☀️" },
+              { title: "Batteries", href: "/nuxt2/home-batteries", icon: "🔋" },
+              { title: "EV Charging", href: "/nuxt2/ev-charging", icon: "⚡" },
+              { title: "Heat Pumps", href: "/nuxt2/heat-pumps", icon: "🌡️" },
+              { title: "Calculator", href: "/nuxt2/solar-calculator", icon: "🔢" },
+              { title: "Incentives", href: "/nuxt2/solar-incentives", icon: "💰" },
             ].map((card, idx) => (
               <Link
                 key={idx}
@@ -192,7 +192,7 @@ export default function SolarPanelCostPage() {
                     }`}
                   >
                     <td className="py-3 px-4 text-sm font-medium text-[#f26522]">
-                      <Link href="/nuxt/solar-incentives" className="hover:underline">
+                      <Link href="/nuxt2/solar-incentives" className="hover:underline">
                         {row.state}
                       </Link>
                     </td>
@@ -215,7 +215,7 @@ export default function SolarPanelCostPage() {
           </p>
           <div className="mt-6">
             <Link
-              href="/nuxt/solar-incentives"
+              href="/nuxt2/solar-incentives"
               className="text-[#f26522] hover:text-[#d4551a] text-sm font-medium"
             >
               View all 50 states &rarr;
@@ -306,7 +306,7 @@ export default function SolarPanelCostPage() {
               </div>
               <div className="mt-6">
                 <Link
-                  href="/nuxt/solar-calculator"
+                  href="/nuxt2/solar-calculator"
                   className="inline-block bg-[#f26522] text-white px-6 py-3 rounded-md font-medium hover:bg-[#d4551a] transition-colors text-sm"
                 >
                   Calculate Your System Size
@@ -340,13 +340,13 @@ export default function SolarPanelCostPage() {
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link
-                  href="/nuxt/financing"
+                  href="/nuxt2/financing"
                   className="inline-block bg-[#f26522] text-white px-6 py-3 rounded-md font-medium hover:bg-[#d4551a] transition-colors text-sm"
                 >
                   Explore Financing Options
                 </Link>
                 <Link
-                  href="/nuxt/solar-incentives"
+                  href="/nuxt2/solar-incentives"
                   className="inline-block border-2 border-[#f26522] text-[#f26522] px-6 py-3 rounded-md font-medium hover:bg-[#f26522] hover:text-white transition-colors text-sm"
                 >
                   View Incentives
@@ -396,7 +396,7 @@ export default function SolarPanelCostPage() {
             installers near you.
           </p>
           <Link
-            href="/nuxt/solar-calculator"
+            href="/nuxt2/solar-calculator"
             className="inline-block bg-white text-[#f26522] px-10 py-4 rounded-md font-semibold hover:bg-gray-100 transition-colors text-sm"
           >
             See Solar Prices

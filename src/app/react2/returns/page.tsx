@@ -104,7 +104,7 @@ export default function ReturnsPage() {
 
           <div className="text-center mt-8">
             <Link
-              href="/react/contact"
+              href="/react2/contact"
               className="inline-block bg-[#2d2926] text-white px-8 py-3 rounded-md font-medium hover:bg-[#1a1714] transition-colors text-sm"
             >
               Contact Support

@@ -23,7 +23,7 @@ export default function CommunitySolarPage() {
               installation required.
             </p>
             <Link
-              href="/nuxt/solar-calculator"
+              href="/nuxt2/solar-calculator"
               className="inline-block bg-white text-emerald-700 px-6 py-3 rounded-md font-medium hover:bg-gray-100 transition-colors text-sm"
             >
               Find Solar Farms Near You
@@ -82,7 +82,7 @@ export default function CommunitySolarPage() {
           </div>
           <div className="text-center mt-8">
             <Link
-              href="/nuxt/home-solar"
+              href="/nuxt2/home-solar"
               className="text-[#f26522] hover:text-[#d4551a] text-sm font-medium"
             >
               Learn more about rooftop solar &rarr;

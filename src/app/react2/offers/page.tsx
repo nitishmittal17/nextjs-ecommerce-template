@@ -15,7 +15,7 @@ const offers = [
     description:
       "Buy two Original Groove® Pillows and save 24%. Perfect for couples or to have a spare.",
     cta: "Shop Now",
-    href: "/react/original-pillow",
+    href: "/react2/original-pillow",
   },
   {
     title: "Sleep Essentials Bundle",
@@ -23,7 +23,7 @@ const offers = [
     description:
       "Get the Groove® Original Pillow, a Pillowcase, and a Sleep Mask all in one bundle.",
     cta: "View Bundle",
-    href: "/react/accessories",
+    href: "/react2/accessories",
   },
   {
     title: "Free Delivery",
@@ -31,7 +31,7 @@ const offers = [
     description:
       "Spend £45 or more and get free delivery across the UK. No code needed.",
     cta: "Start Shopping",
-    href: "/react/all-pillows",
+    href: "/react2/all-pillows",
   },
 ];
 
@@ -93,7 +93,7 @@ export default function OffersPage() {
               you see no difference, simply return it for a full refund.
             </p>
             <Link
-              href="/react/original-pillow"
+              href="/react2/original-pillow"
               className="inline-block bg-white text-[#2d2926] px-8 py-3.5 rounded-md font-medium hover:bg-gray-100 transition-colors text-sm"
             >
               Try Risk-Free

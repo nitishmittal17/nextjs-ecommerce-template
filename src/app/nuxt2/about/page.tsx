@@ -108,13 +108,13 @@ export default function AboutPage() {
           </p>
           <div className="flex flex-wrap gap-4">
             <Link
-              href="/nuxt/solar-calculator"
+              href="/nuxt2/solar-calculator"
               className="bg-[#f26522] text-white px-6 py-3 rounded-md font-medium hover:bg-[#d4551a] transition-colors text-sm"
             >
               Get Solar Quotes
             </Link>
             <Link
-              href="/nuxt/contact"
+              href="/nuxt2/contact"
               className="border-2 border-[#f26522] text-[#f26522] px-6 py-3 rounded-md font-medium hover:bg-[#f26522] hover:text-white transition-colors text-sm"
             >
               Contact Us

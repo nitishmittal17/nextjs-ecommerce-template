@@ -97,7 +97,7 @@ export default function BlogPage() {
             {posts.slice(1).map((post, idx) => (
               <Link
                 key={idx}
-                href="/nuxt/blog"
+                href="/nuxt2/blog"
                 className="group bg-white border border-gray-200 rounded-xl p-6 hover:shadow-lg hover:border-[#f26522] transition-all"
               >
                 <div className="flex items-center gap-3 mb-3">

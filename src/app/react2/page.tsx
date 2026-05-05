@@ -13,7 +13,7 @@ const products = [
     price: "£33.00",
     reviews: "12,609 Reviews",
     description: "Designed to relieve neck pain",
-    href: "/react/original-pillow",
+    href: "/react2/original-pillow",
     badge: "BESTSELLER",
   },
   {
@@ -21,7 +21,7 @@ const products = [
     price: "£45.00",
     reviews: "291 Reviews",
     description: "Adjust the height with four panels",
-    href: "/react/adjustable-pillow",
+    href: "/react2/adjustable-pillow",
     badge: "NEW",
   },
   {
@@ -29,7 +29,7 @@ const products = [
     price: "£15.00",
     reviews: "143 Reviews",
     description: "The perfect partner for your Groove® Pillow",
-    href: "/react/pillowcases",
+    href: "/react2/pillowcases",
     badge: null,
   },
   {
@@ -37,7 +37,7 @@ const products = [
     price: "£28.00",
     reviews: "New Product",
     description: "Adjustable pillow for knee & hip pain",
-    href: "/react/all-pillows",
+    href: "/react2/all-pillows",
     badge: "NEW",
   },
   {
@@ -45,7 +45,7 @@ const products = [
     price: "£45.00",
     reviews: "21 Reviews",
     description: "Full body pain relief pillow",
-    href: "/react/all-pillows",
+    href: "/react2/all-pillows",
     badge: null,
   },
   {
@@ -53,7 +53,7 @@ const products = [
     price: "£16.50",
     reviews: "161 Reviews",
     description: "For lower back pain relief",
-    href: "/react/all-pillows",
+    href: "/react2/all-pillows",
     badge: null,
   },
 ];
@@ -135,7 +135,7 @@ export default function GrooveHomePage() {
               <div className="flex items-center gap-4">
                 <span className="text-3xl font-bold text-[#2d2926]">£33.00</span>
                 <Link
-                  href="/react/original-pillow"
+                  href="/react2/original-pillow"
                   className="inline-block bg-[#2d2926] text-white px-8 py-3.5 rounded-md font-medium hover:bg-[#1a1714] transition-colors text-sm uppercase tracking-wider"
                 >
                   Shop Now
@@ -221,7 +221,7 @@ export default function GrooveHomePage() {
 
           <div className="text-center mt-10">
             <Link
-              href="/react/all-pillows"
+              href="/react2/all-pillows"
               className="inline-block border-2 border-[#2d2926] text-[#2d2926] px-8 py-3 rounded-md font-medium hover:bg-[#2d2926] hover:text-white transition-colors text-sm uppercase tracking-wider"
             >
               View All Pillows
@@ -337,7 +337,7 @@ export default function GrooveHomePage() {
             refund within 100 nights.
           </p>
           <Link
-            href="/react/original-pillow"
+            href="/react2/original-pillow"
             className="inline-block bg-white text-[#2d2926] px-10 py-4 rounded-md font-medium hover:bg-gray-100 transition-colors text-sm uppercase tracking-wider"
           >
             Shop Now

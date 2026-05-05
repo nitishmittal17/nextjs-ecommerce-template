@@ -89,7 +89,7 @@ export default function PillowcasesPage() {
 
           <div className="text-center mt-12">
             <Link
-              href="/react/all-pillows"
+              href="/react2/all-pillows"
               className="text-[#7c6f64] hover:text-[#2d2926] text-sm font-medium transition-colors"
             >
               &larr; Back to All Pillows

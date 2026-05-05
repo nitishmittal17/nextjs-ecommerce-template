@@ -2,31 +2,46 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const navLinks = [
   {
     title: "Pillows",
     submenu: [
-      { title: "Original Pillow", path: "/react/original-pillow" },
-      { title: "Adjustable Pillow", path: "/react/adjustable-pillow" },
-      { title: "All Pillows", path: "/react/all-pillows" },
+      { title: "Original Pillow", path: "/original-pillow" },
+      { title: "Adjustable Pillow", path: "/adjustable-pillow" },
+      { title: "All Pillows", path: "/all-pillows" },
     ],
   },
-  { title: "Pillowcases", path: "/react/pillowcases" },
-  { title: "Accessories", path: "/react/accessories" },
-  { title: "Reviews", path: "/react/reviews" },
-  { title: "Offers", path: "/react/offers" },
+  { title: "Pillowcases", path: "/pillowcases" },
+  { title: "Accessories", path: "/accessories" },
+  { title: "Reviews", path: "/reviews" },
+  { title: "Offers", path: "/offers" },
 ];
 
 const secondaryLinks = [
-  { title: "Shipping", path: "/react/shipping" },
-  { title: "Returns", path: "/react/returns" },
-  { title: "Contact Us", path: "/react/contact" },
-  { title: "Wholesale", path: "/react/wholesale" },
-  { title: "FAQ", path: "/react/faq" },
+  { title: "Shipping", path: "/shipping" },
+  { title: "Returns", path: "/returns" },
+  { title: "Contact Us", path: "/contact" },
+  { title: "Wholesale", path: "/wholesale" },
+  { title: "FAQ", path: "/faq" },
 ];
 
+const GROOVE_BASES = ["/react2", "/react"] as const;
+
+const resolveGrooveBase = (pathname: string | null): string => {
+  if (!pathname) return "/react";
+  const match = GROOVE_BASES.find(
+    (base) => pathname === base || pathname.startsWith(`${base}/`),
+  );
+  return match ?? "/react";
+};
+
 const GrooveHeader = () => {
+  const pathname = usePathname();
+  const base = resolveGrooveBase(pathname);
+  const withBase = (path: string) => `${base}${path}`;
+
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [pillowDropdownOpen, setPillowDropdownOpen] = useState(false);
   const [stickyHeader, setStickyHeader] = useState(false);
@@ -58,7 +73,7 @@ const GrooveHeader = () => {
         <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between py-4">
             {/* Logo */}
-            <Link href="/react" className="flex-shrink-0 flex items-center gap-3">
+            <Link href={base} className="flex-shrink-0 flex items-center gap-3">
               <Image
                 src="/images/parrot-nav.png"
                 alt="Parrot"
@@ -109,7 +124,7 @@ const GrooveHeader = () => {
                         {link.submenu.map((sub, subIdx) => (
                           <Link
                             key={subIdx}
-                            href={sub.path}
+                            href={withBase(sub.path)}
                             className="block px-4 py-2.5 text-sm text-[#2d2926] hover:bg-[#f5f0eb] hover:text-[#7c6f64] transition-colors"
                           >
                             {sub.title}
@@ -121,7 +136,7 @@ const GrooveHeader = () => {
                 ) : (
                   <Link
                     key={idx}
-                    href={link.path!}
+                    href={withBase(link.path!)}
                     className="text-sm font-medium text-[#2d2926] hover:text-[#7c6f64] transition-colors"
                   >
                     {link.title}
@@ -135,7 +150,7 @@ const GrooveHeader = () => {
               {secondaryLinks.slice(0, 3).map((link, idx) => (
                 <Link
                   key={idx}
-                  href={link.path}
+                  href={withBase(link.path)}
                   className="text-xs font-medium text-[#7c6f64] hover:text-[#2d2926] transition-colors"
                 >
                   {link.title}
@@ -200,7 +215,7 @@ const GrooveHeader = () => {
                       {link.submenu.map((sub, subIdx) => (
                         <Link
                           key={subIdx}
-                          href={sub.path}
+                          href={withBase(sub.path)}
                           className="block pl-6 pr-3 py-2 text-sm text-[#2d2926] hover:bg-[#f5f0eb] rounded-md"
                           onClick={() => setMobileMenuOpen(false)}
                         >
@@ -211,7 +226,7 @@ const GrooveHeader = () => {
                   ) : (
                     <Link
                       key={idx}
-                      href={link.path!}
+                      href={withBase(link.path!)}
                       className="block px-3 py-2 text-sm text-[#2d2926] hover:bg-[#f5f0eb] rounded-md"
                       onClick={() => setMobileMenuOpen(false)}
                     >
@@ -223,7 +238,7 @@ const GrooveHeader = () => {
                 {secondaryLinks.map((link, idx) => (
                   <Link
                     key={idx}
-                    href={link.path}
+                    href={withBase(link.path)}
                     className="block px-3 py-2 text-sm text-[#7c6f64] hover:bg-[#f5f0eb] rounded-md"
                     onClick={() => setMobileMenuOpen(false)}
                   >

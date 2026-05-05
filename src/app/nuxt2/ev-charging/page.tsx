@@ -23,7 +23,7 @@ export default function EVChargingPage() {
               charger and save even more by pairing with solar panels.
             </p>
             <Link
-              href="/nuxt/home-solar"
+              href="/nuxt2/home-solar"
               className="bg-white text-indigo-700 px-6 py-3 rounded-md font-medium hover:bg-gray-100 transition-colors text-sm"
             >
               Solar + EV Charging
@@ -142,7 +142,7 @@ export default function EVChargingPage() {
                 annual EV charging costs.
               </p>
               <Link
-                href="/nuxt/home-solar"
+                href="/nuxt2/home-solar"
                 className="inline-block bg-indigo-600 text-white px-6 py-2.5 rounded-md text-sm font-medium hover:bg-indigo-700 transition-colors"
               >
                 Learn About Solar

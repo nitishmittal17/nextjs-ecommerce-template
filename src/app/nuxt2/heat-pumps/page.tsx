@@ -23,7 +23,7 @@ export default function HeatPumpsPage() {
               perfect companion for solar panels.
             </p>
             <Link
-              href="/nuxt/solar-calculator"
+              href="/nuxt2/solar-calculator"
               className="bg-white text-teal-700 px-6 py-3 rounded-md font-medium hover:bg-gray-100 transition-colors text-sm"
             >
               Get Heat Pump Quotes
@@ -96,7 +96,7 @@ export default function HeatPumpsPage() {
             means nearly free heating and cooling for your home.
           </p>
           <Link
-            href="/nuxt/home-solar"
+            href="/nuxt2/home-solar"
             className="inline-block bg-[#f26522] text-white px-8 py-3 rounded-md font-medium hover:bg-[#d4551a] transition-colors text-sm"
           >
             Explore Solar + Heat Pumps

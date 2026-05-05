@@ -14,7 +14,7 @@ const allProducts = [
     price: "£33.00",
     reviews: "12,609",
     description: "Designed to relieve neck pain",
-    href: "/react/original-pillow",
+    href: "/react2/original-pillow",
     badge: "BESTSELLER",
   },
   {
@@ -22,7 +22,7 @@ const allProducts = [
     price: "£45.00",
     reviews: "291",
     description: "Adjust the height with four panels",
-    href: "/react/adjustable-pillow",
+    href: "/react2/adjustable-pillow",
     badge: "NEW",
   },
   {
@@ -30,7 +30,7 @@ const allProducts = [
     price: "£28.00",
     reviews: null,
     description: "For knee & hip pain relief",
-    href: "/react/all-pillows",
+    href: "/react2/all-pillows",
     badge: "NEW",
   },
   {
@@ -38,7 +38,7 @@ const allProducts = [
     price: "£45.00",
     reviews: "21",
     description: "Full body pain relief pillow",
-    href: "/react/all-pillows",
+    href: "/react2/all-pillows",
     badge: null,
   },
   {
@@ -46,7 +46,7 @@ const allProducts = [
     price: "£16.50",
     reviews: "161",
     description: "For lower back pain relief",
-    href: "/react/all-pillows",
+    href: "/react2/all-pillows",
     badge: null,
   },
 ];

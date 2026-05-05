@@ -1,8 +1,23 @@
+"use client";
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const ES_BASES = ["/nuxt2", "/nuxt"] as const;
+
+const resolveEsBase = (pathname: string | null): string => {
+  if (!pathname) return "/nuxt";
+  const match = ES_BASES.find(
+    (base) => pathname === base || pathname.startsWith(`${base}/`),
+  );
+  return match ?? "/nuxt";
+};
 
 const ESFooter = () => {
   const year = new Date().getFullYear();
+  const pathname = usePathname();
+  const base = resolveEsBase(pathname);
+  const withBase = (path: string) => `${base}${path}`;
 
   return (
     <footer className="bg-[#1a2332] text-white">
@@ -16,16 +31,16 @@ const ESFooter = () => {
             </h4>
             <ul className="flex flex-col gap-2.5">
               {[
-                { label: "Home Solar", href: "/nuxt/home-solar" },
-                { label: "Home Batteries", href: "/nuxt/home-batteries" },
-                { label: "EV Charging", href: "/nuxt/ev-charging" },
-                { label: "Heat Pumps", href: "/nuxt/heat-pumps" },
-                { label: "Community Solar", href: "/nuxt/community-solar" },
-                { label: "Electricity Plans", href: "/nuxt/electricity-plans" },
+                { label: "Home Solar", href: "/home-solar" },
+                { label: "Home Batteries", href: "/home-batteries" },
+                { label: "EV Charging", href: "/ev-charging" },
+                { label: "Heat Pumps", href: "/heat-pumps" },
+                { label: "Community Solar", href: "/community-solar" },
+                { label: "Electricity Plans", href: "/electricity-plans" },
               ].map((link, idx) => (
                 <li key={idx}>
                   <Link
-                    href={link.href}
+                    href={withBase(link.href)}
                     className="text-sm text-gray-300 hover:text-white transition-colors"
                   >
                     {link.label}
@@ -42,15 +57,15 @@ const ESFooter = () => {
             </h4>
             <ul className="flex flex-col gap-2.5">
               {[
-                { label: "Solar Calculator", href: "/nuxt/solar-calculator" },
-                { label: "Solar Incentives", href: "/nuxt/solar-incentives" },
-                { label: "Financing", href: "/nuxt/financing" },
-                { label: "News", href: "/nuxt/news" },
-                { label: "Blog", href: "/nuxt/blog" },
+                { label: "Solar Calculator", href: "/solar-calculator" },
+                { label: "Solar Incentives", href: "/solar-incentives" },
+                { label: "Financing", href: "/financing" },
+                { label: "News", href: "/news" },
+                { label: "Blog", href: "/blog" },
               ].map((link, idx) => (
                 <li key={idx}>
                   <Link
-                    href={link.href}
+                    href={withBase(link.href)}
                     className="text-sm text-gray-300 hover:text-white transition-colors"
                   >
                     {link.label}
@@ -67,14 +82,14 @@ const ESFooter = () => {
             </h4>
             <ul className="flex flex-col gap-2.5">
               {[
-                { label: "About EnergySage", href: "/nuxt/about" },
-                { label: "Contact Us", href: "/nuxt/contact" },
-                { label: "How It Works", href: "/nuxt/about" },
-                { label: "Editorial Guidelines", href: "/nuxt/about" },
+                { label: "About EnergySage", href: "/about" },
+                { label: "Contact Us", href: "/contact" },
+                { label: "How It Works", href: "/about" },
+                { label: "Editorial Guidelines", href: "/about" },
               ].map((link, idx) => (
                 <li key={idx}>
                   <Link
-                    href={link.href}
+                    href={withBase(link.href)}
                     className="text-sm text-gray-300 hover:text-white transition-colors"
                   >
                     {link.label}
@@ -141,10 +156,10 @@ const ESFooter = () => {
               </span>
             </div>
             <div className="flex items-center gap-5">
-              <Link href="/nuxt" className="text-xs text-gray-400 hover:text-white transition-colors">
+              <Link href={base} className="text-xs text-gray-400 hover:text-white transition-colors">
                 Terms of Use
               </Link>
-              <Link href="/nuxt" className="text-xs text-gray-400 hover:text-white transition-colors">
+              <Link href={base} className="text-xs text-gray-400 hover:text-white transition-colors">
                 Privacy Policy
               </Link>
             </div>

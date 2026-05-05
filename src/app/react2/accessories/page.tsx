@@ -13,19 +13,19 @@ const accessories = [
     name: "Groove® Cooling Tencel Pillowcase",
     price: "£15.00",
     description: "Temperature-regulating Tencel fabric",
-    href: "/react/pillowcases",
+    href: "/react2/pillowcases",
   },
   {
     name: "Groove® 100% Cotton Pillowcase 2-Pack",
     price: "£21.50",
     description: "Soft, breathable 100% cotton. Pack of 2.",
-    href: "/react/pillowcases",
+    href: "/react2/pillowcases",
   },
   {
     name: "Groove® Original Sleep Essentials Bundle",
     price: "£49.00",
     description: "The Groove Original Pillow, Pillowcase and Mask Bundle",
-    href: "/react/original-pillow",
+    href: "/react2/original-pillow",
   },
 ];
 

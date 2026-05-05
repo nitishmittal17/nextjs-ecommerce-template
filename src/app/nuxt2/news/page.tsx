@@ -66,7 +66,7 @@ export default function NewsPage() {
             {articles.map((article, idx) => (
               <Link
                 key={idx}
-                href="/nuxt/news"
+                href="/nuxt2/news"
                 className="group bg-white border border-gray-200 rounded-xl overflow-hidden hover:shadow-lg hover:border-[#f26522] transition-all"
               >
                 <div className="bg-gray-100 h-44 flex items-center justify-center">

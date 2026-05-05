@@ -2,45 +2,60 @@
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 
 const mainNav = [
   {
     title: "Home Solar",
     submenu: [
-      { title: "Home Solar Guide", path: "/nuxt/home-solar" },
-      { title: "Solar Calculator", path: "/nuxt/solar-calculator" },
-      { title: "Solar Incentives", path: "/nuxt/solar-incentives" },
-      { title: "Financing", path: "/nuxt/financing" },
-      { title: "Best Solar Panels", path: "/nuxt/home-solar" },
+      { title: "Home Solar Guide", path: "/home-solar" },
+      { title: "Solar Calculator", path: "/solar-calculator" },
+      { title: "Solar Incentives", path: "/solar-incentives" },
+      { title: "Financing", path: "/financing" },
+      { title: "Best Solar Panels", path: "/home-solar" },
     ],
   },
   {
     title: "Home Batteries",
-    path: "/nuxt/home-batteries",
+    path: "/home-batteries",
   },
   {
     title: "EV Charging",
-    path: "/nuxt/ev-charging",
+    path: "/ev-charging",
   },
   {
     title: "Heat Pumps",
-    path: "/nuxt/heat-pumps",
+    path: "/heat-pumps",
   },
   {
     title: "Electricity Plans",
-    path: "/nuxt/electricity-plans",
+    path: "/electricity-plans",
   },
 ];
 
 const secondaryNav = [
-  { title: "Community Solar", path: "/nuxt/community-solar" },
-  { title: "News", path: "/nuxt/news" },
-  { title: "Blog", path: "/nuxt/blog" },
-  { title: "About Us", path: "/nuxt/about" },
-  { title: "Contact", path: "/nuxt/contact" },
+  { title: "Community Solar", path: "/community-solar" },
+  { title: "News", path: "/news" },
+  { title: "Blog", path: "/blog" },
+  { title: "About Us", path: "/about" },
+  { title: "Contact", path: "/contact" },
 ];
 
+const ES_BASES = ["/nuxt2", "/nuxt"] as const;
+
+const resolveEsBase = (pathname: string | null): string => {
+  if (!pathname) return "/nuxt";
+  const match = ES_BASES.find(
+    (base) => pathname === base || pathname.startsWith(`${base}/`),
+  );
+  return match ?? "/nuxt";
+};
+
 const ESHeader = () => {
+  const pathname = usePathname();
+  const base = resolveEsBase(pathname);
+  const withBase = (path: string) => `${base}${path}`;
+
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<number | null>(null);
   const [sticky, setSticky] = useState(false);
@@ -61,7 +76,7 @@ const ESHeader = () => {
       <div className="max-w-[1200px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
-          <Link href="/nuxt" className="flex items-center gap-2 flex-shrink-0">
+          <Link href={base} className="flex items-center gap-2 flex-shrink-0">
             <Image
               src="/images/parrot-nav.png"
               alt="Parrot"
@@ -102,7 +117,7 @@ const ESHeader = () => {
                       {item.submenu.map((sub, subIdx) => (
                         <Link
                           key={subIdx}
-                          href={sub.path}
+                          href={withBase(sub.path)}
                           className="block px-4 py-2.5 text-sm text-[#333] hover:bg-orange-50 hover:text-[#f26522] transition-colors"
                         >
                           {sub.title}
@@ -114,7 +129,7 @@ const ESHeader = () => {
               ) : (
                 <Link
                   key={idx}
-                  href={item.path!}
+                  href={withBase(item.path!)}
                   className="px-3 py-2 text-sm font-medium text-[#333] hover:text-[#f26522] transition-colors rounded-md hover:bg-orange-50"
                 >
                   {item.title}
@@ -126,13 +141,13 @@ const ESHeader = () => {
           {/* Right side */}
           <div className="hidden lg:flex items-center gap-4">
             <Link
-              href="/nuxt/solar-calculator"
+              href={withBase("/solar-calculator")}
               className="text-sm font-medium text-[#f26522] hover:text-[#d4551a] transition-colors"
             >
               Solar Calculator
             </Link>
             <Link
-              href="/nuxt/about"
+              href={withBase("/about")}
               className="bg-[#f26522] text-white px-4 py-2 rounded-md text-sm font-medium hover:bg-[#d4551a] transition-colors"
             >
               Get Quotes
@@ -181,7 +196,7 @@ const ESHeader = () => {
                     {item.submenu.map((sub, subIdx) => (
                       <Link
                         key={subIdx}
-                        href={sub.path}
+                        href={withBase(sub.path)}
                         className="block pl-6 pr-3 py-2 text-sm text-[#333] hover:bg-orange-50 rounded-md"
                         onClick={() => setMobileOpen(false)}
                       >
@@ -192,7 +207,7 @@ const ESHeader = () => {
                 ) : (
                   <Link
                     key={idx}
-                    href={item.path!}
+                    href={withBase(item.path!)}
                     className="block px-3 py-2 text-sm text-[#333] hover:bg-orange-50 rounded-md"
                     onClick={() => setMobileOpen(false)}
                   >
@@ -204,7 +219,7 @@ const ESHeader = () => {
               {secondaryNav.map((link, idx) => (
                 <Link
                   key={idx}
-                  href={link.path}
+                  href={withBase(link.path)}
                   className="block px-3 py-2 text-sm text-gray-500 hover:bg-orange-50 rounded-md"
                   onClick={() => setMobileOpen(false)}
                 >

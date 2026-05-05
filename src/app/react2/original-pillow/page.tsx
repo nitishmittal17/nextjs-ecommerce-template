@@ -13,7 +13,7 @@ export default function OriginalPillowPage() {
     <>
       <GrooveBreadcrumb
         items={[
-          { label: "All Pillows", path: "/react/all-pillows" },
+          { label: "All Pillows", path: "/react2/all-pillows" },
           { label: "Original Pillow" },
         ]}
       />
@@ -174,7 +174,7 @@ export default function OriginalPillowPage() {
             materials.
           </p>
           <Link
-            href="/react/adjustable-pillow"
+            href="/react2/adjustable-pillow"
             className="inline-block bg-[#2d2926] text-white px-8 py-3.5 rounded-md font-medium hover:bg-[#1a1714] transition-colors text-sm uppercase tracking-wider"
           >
             Shop Adjustable

@@ -31,13 +31,13 @@ export default function HomeBatteriesPage() {
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
-                href="/nuxt/solar-calculator"
+                href="/nuxt2/solar-calculator"
                 className="bg-[#f26522] text-white px-6 py-3 rounded-md font-medium hover:bg-[#d4551a] transition-colors text-sm"
               >
                 Get Battery Quotes
               </Link>
               <Link
-                href="/nuxt/home-solar"
+                href="/nuxt2/home-solar"
                 className="border border-white/30 text-white px-6 py-3 rounded-md font-medium hover:bg-white/10 transition-colors text-sm"
               >
                 Solar + Battery

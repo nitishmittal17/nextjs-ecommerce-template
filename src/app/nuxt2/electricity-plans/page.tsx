@@ -24,7 +24,7 @@ export default function ElectricityPlansPage() {
               deregulated markets. Compare plans to lower your monthly bill.
             </p>
             <Link
-              href="/nuxt/solar-calculator"
+              href="/nuxt2/solar-calculator"
               className="bg-[#f26522] text-white px-6 py-3 rounded-md font-medium hover:bg-[#d4551a] transition-colors text-sm"
             >
               Compare Plans in Your Area
@@ -85,7 +85,7 @@ export default function ElectricityPlansPage() {
             dramatically reduce or eliminate your electricity bill.
           </p>
           <Link
-            href="/nuxt/home-solar"
+            href="/nuxt2/home-solar"
             className="inline-block bg-[#f26522] text-white px-8 py-3 rounded-md font-medium hover:bg-[#d4551a] transition-colors text-sm"
           >
             Explore Home Solar

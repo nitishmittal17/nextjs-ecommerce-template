@@ -137,7 +137,7 @@ export default function SolarIncentivesPage() {
             )}
           </div>
           <Link
-            href="/nuxt/solar-calculator"
+            href="/nuxt2/solar-calculator"
             className="inline-block bg-[#f26522] text-white px-8 py-3 rounded-md font-medium hover:bg-[#d4551a] transition-colors text-sm"
           >
             Check Incentives in Your Area

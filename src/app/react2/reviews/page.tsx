@@ -157,7 +157,7 @@ export default function ReviewsPage() {
 
           <div className="text-center mt-12">
             <Link
-              href="/react/original-pillow"
+              href="/react2/original-pillow"
               className="inline-block bg-[#2d2926] text-white px-8 py-3.5 rounded-md font-medium hover:bg-[#1a1714] transition-colors text-sm uppercase tracking-wider"
             >
               Shop The Original Groove® Pillow

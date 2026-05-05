@@ -12,37 +12,37 @@ const guides = [
   {
     title: "How much do solar panels cost?",
     description: "Average costs, state-by-state pricing, and what impacts your price.",
-    href: "/nuxt",
+    href: "/nuxt2",
     tag: "Editors' Pick",
   },
   {
     title: "Solar Calculator",
     description: "Get a personalized estimate of your solar panel costs and savings.",
-    href: "/nuxt/solar-calculator",
+    href: "/nuxt2/solar-calculator",
     tag: null,
   },
   {
     title: "Solar Incentives & Rebates",
     description: "Tax credits, rebates, and other incentives that can lower your cost.",
-    href: "/nuxt/solar-incentives",
+    href: "/nuxt2/solar-incentives",
     tag: null,
   },
   {
     title: "How to Pay for Solar",
     description: "Compare cash, loans, and leases to find the best financing option.",
-    href: "/nuxt/financing",
+    href: "/nuxt2/financing",
     tag: null,
   },
   {
     title: "Best Solar Panels",
     description: "Compare the top solar panel brands by efficiency, warranty, and price.",
-    href: "/nuxt/home-solar",
+    href: "/nuxt2/home-solar",
     tag: "Popular",
   },
   {
     title: "Solar Panel Maintenance",
     description: "What you need to know about keeping your panels running efficiently.",
-    href: "/nuxt/home-solar",
+    href: "/nuxt2/home-solar",
     tag: null,
   },
 ];
@@ -69,13 +69,13 @@ export default function HomeSolarPage() {
             </p>
             <div className="flex flex-wrap gap-4">
               <Link
-                href="/nuxt/solar-calculator"
+                href="/nuxt2/solar-calculator"
                 className="bg-[#f26522] text-white px-6 py-3 rounded-md font-medium hover:bg-[#d4551a] transition-colors text-sm"
               >
                 Get Personalized Quotes
               </Link>
               <Link
-                href="/nuxt"
+                href="/nuxt2"
                 className="border border-white/30 text-white px-6 py-3 rounded-md font-medium hover:bg-white/10 transition-colors text-sm"
               >
                 See Solar Costs
@@ -150,7 +150,7 @@ export default function HomeSolarPage() {
             Compare quotes from top-rated installers in your area. 100% free.
           </p>
           <Link
-            href="/nuxt/solar-calculator"
+            href="/nuxt2/solar-calculator"
             className="inline-block bg-[#f26522] text-white px-8 py-3.5 rounded-md font-medium hover:bg-[#d4551a] transition-colors text-sm"
           >
             Get Started

@@ -115,13 +115,13 @@ export default function SolarCalculatorPage() {
                   </div>
                   <div className="mt-6 flex gap-3">
                     <Link
-                      href="/nuxt/financing"
+                      href="/nuxt2/financing"
                       className="flex-1 text-center bg-[#f26522] text-white py-3 rounded-md text-sm font-medium hover:bg-[#d4551a] transition-colors"
                     >
                       Explore Financing
                     </Link>
                     <Link
-                      href="/nuxt/solar-incentives"
+                      href="/nuxt2/solar-incentives"
                       className="flex-1 text-center border border-[#f26522] text-[#f26522] py-3 rounded-md text-sm font-medium hover:bg-orange-50 transition-colors"
                     >
                       View Incentives

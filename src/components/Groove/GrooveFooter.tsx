@@ -1,8 +1,23 @@
+"use client";
 import React from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+
+const GROOVE_BASES = ["/react2", "/react"] as const;
+
+const resolveGrooveBase = (pathname: string | null): string => {
+  if (!pathname) return "/react";
+  const match = GROOVE_BASES.find(
+    (base) => pathname === base || pathname.startsWith(`${base}/`),
+  );
+  return match ?? "/react";
+};
 
 const GrooveFooter = () => {
   const year = new Date().getFullYear();
+  const pathname = usePathname();
+  const base = resolveGrooveBase(pathname);
+  const withBase = (path: string) => `${base}${path}`;
 
   return (
     <footer className="bg-[#2d2926] text-white">
@@ -32,7 +47,7 @@ const GrooveFooter = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Brand Column */}
           <div>
-            <Link href="/react" className="inline-block mb-4">
+            <Link href={base} className="inline-block mb-4">
               <span className="text-2xl font-bold tracking-tight">
                 Groove<span className="text-[#a89888]">&reg;</span>
               </span>
@@ -51,7 +66,7 @@ const GrooveFooter = () => {
             <ul className="flex flex-col gap-2.5">
               <li>
                 <Link
-                  href="/react/original-pillow"
+                  href={withBase("/original-pillow")}
                   className="text-sm text-gray-300 hover:text-white transition-colors"
                 >
                   Original Pillow
@@ -59,7 +74,7 @@ const GrooveFooter = () => {
               </li>
               <li>
                 <Link
-                  href="/react/adjustable-pillow"
+                  href={withBase("/adjustable-pillow")}
                   className="text-sm text-gray-300 hover:text-white transition-colors"
                 >
                   Adjustable Memory Pillow
@@ -67,7 +82,7 @@ const GrooveFooter = () => {
               </li>
               <li>
                 <Link
-                  href="/react/all-pillows"
+                  href={withBase("/all-pillows")}
                   className="text-sm text-gray-300 hover:text-white transition-colors"
                 >
                   All Pillows
@@ -75,7 +90,7 @@ const GrooveFooter = () => {
               </li>
               <li>
                 <Link
-                  href="/react/pillowcases"
+                  href={withBase("/pillowcases")}
                   className="text-sm text-gray-300 hover:text-white transition-colors"
                 >
                   Pillowcases
@@ -83,7 +98,7 @@ const GrooveFooter = () => {
               </li>
               <li>
                 <Link
-                  href="/react/accessories"
+                  href={withBase("/accessories")}
                   className="text-sm text-gray-300 hover:text-white transition-colors"
                 >
                   Accessories
@@ -100,7 +115,7 @@ const GrooveFooter = () => {
             <ul className="flex flex-col gap-2.5">
               <li>
                 <Link
-                  href="/react/shipping"
+                  href={withBase("/shipping")}
                   className="text-sm text-gray-300 hover:text-white transition-colors"
                 >
                   Shipping
@@ -108,7 +123,7 @@ const GrooveFooter = () => {
               </li>
               <li>
                 <Link
-                  href="/react/returns"
+                  href={withBase("/returns")}
                   className="text-sm text-gray-300 hover:text-white transition-colors"
                 >
                   Returns &amp; Warranty
@@ -116,7 +131,7 @@ const GrooveFooter = () => {
               </li>
               <li>
                 <Link
-                  href="/react/faq"
+                  href={withBase("/faq")}
                   className="text-sm text-gray-300 hover:text-white transition-colors"
                 >
                   FAQ
@@ -124,7 +139,7 @@ const GrooveFooter = () => {
               </li>
               <li>
                 <Link
-                  href="/react/contact"
+                  href={withBase("/contact")}
                   className="text-sm text-gray-300 hover:text-white transition-colors"
                 >
                   Contact
@@ -132,7 +147,7 @@ const GrooveFooter = () => {
               </li>
               <li>
                 <Link
-                  href="/react/wholesale"
+                  href={withBase("/wholesale")}
                   className="text-sm text-gray-300 hover:text-white transition-colors"
                 >
                   Wholesale
@@ -149,7 +164,7 @@ const GrooveFooter = () => {
             <ul className="flex flex-col gap-2.5">
               <li>
                 <Link
-                  href="/react/reviews"
+                  href={withBase("/reviews")}
                   className="text-sm text-gray-300 hover:text-white transition-colors"
                 >
                   Reviews
@@ -157,7 +172,7 @@ const GrooveFooter = () => {
               </li>
               <li>
                 <Link
-                  href="/react/offers"
+                  href={withBase("/offers")}
                   className="text-sm text-gray-300 hover:text-white transition-colors"
                 >
                   Offers
@@ -165,7 +180,7 @@ const GrooveFooter = () => {
               </li>
               <li>
                 <Link
-                  href="/react"
+                  href={base}
                   className="text-sm text-gray-300 hover:text-white transition-colors"
                 >
                   Home
@@ -185,13 +200,13 @@ const GrooveFooter = () => {
             </p>
             <div className="flex items-center gap-4">
               <Link
-                href="/react"
+                href={base}
                 className="text-xs text-gray-400 hover:text-white transition-colors"
               >
                 Privacy Policy
               </Link>
               <Link
-                href="/react"
+                href={base}
                 className="text-xs text-gray-400 hover:text-white transition-colors"
               >
                 Terms and Conditions
